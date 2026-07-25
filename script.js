@@ -1,14 +1,14 @@
-/* === Uncountable v2 — Interactive Logic === */
+/* Uncountable — Interactive Logic */
 (function () {
     'use strict';
 
-    // --- Config ---
+    // Config
     const TABLE_ROWS = 8;
     const DECIMAL_PLACES = 8;
     const INFINITE_TABLE_ROWS = 50;
     const SEQUENCE_DISPLAY_COUNT = 10;
 
-    // --- State ---
+    // State
     let userNumbers = [];
     let tableData = [];
     let diagonalDigits = [];
@@ -16,7 +16,7 @@
     let currentDiagStep = 0;
     let currentCheckRow = 0;
 
-    // --- Helpers ---
+    // Helpers
     function randDigit() { return Math.floor(Math.random() * 10); }
     function randDecimal() {
         let s = '0.';
@@ -48,11 +48,11 @@
 
     function initTableData() {
         tableData = [];
-        // First rows: user's input numbers
+        // User numbers first
         userNumbers.forEach(num => {
             tableData.push(parseDecimalDigits(num));
         });
-        // Fill remaining rows with random digits
+        // Fill with random
         for (let i = tableData.length; i < TABLE_ROWS; i++) {
             let digits = [];
             for (let j = 0; j < DECIMAL_PLACES; j++) digits.push(randDigit());
@@ -60,7 +60,7 @@
         }
     }
 
-    // --- Gallery 1: Intuition (counting interaction + fade-in) ---
+    // Gallery 1: Intuition
     let count = 0;
     function initGallery1() {
         const display = $('countDisplay');
@@ -93,7 +93,7 @@
         observer.observe($('gallery-1'));
     }
 
-    // --- Gallery 2: Galileo's Paradox ---
+    // Gallery 2: Paradox
     const GRID_SIZE = 50;
     let gridSelected = new Set();
     let gridChecked = false;
@@ -125,7 +125,7 @@
         naturalContainer.appendChild(el('span', 'pair-num', '…'));
         squareContainer.appendChild(el('span', 'pair-num', '…'));
 
-        // Angle 1: Number grid
+        // Angle 1
         initNumberGrid();
 
         // Ratio slider
@@ -146,7 +146,7 @@
         slider.addEventListener('input', updateRatio);
         updateRatio();
 
-        // Angle navigation
+        // Navigation
         $('toAngle2').onclick = () => {
             $('angle-1').classList.add('hidden');
             $('angle-2').classList.remove('hidden');
@@ -154,7 +154,7 @@
         };
         $('checkGrid').onclick = checkGrid;
 
-        // Angle 2: Pair test
+        // Angle 2
         $('pairTest').onclick = tryPair;
         $('pairInput').addEventListener('keydown', e => { if (e.key === 'Enter') tryPair(); });
         $('toCollision').onclick = () => {
@@ -237,7 +237,7 @@
         if (n === 0) return '0';
         const str = n.toString();
         if (str.length <= 12) return n.toLocaleString('zh-CN');
-        // For very large numbers, show with scientific notation
+        // Large numbers
         const exp = Math.floor(Math.log10(Math.abs(n)));
         const mantissa = n / Math.pow(10, exp);
         return `${mantissa.toFixed(4)} × 10^${exp}`;
@@ -269,7 +269,7 @@
         input.value = '';
         input.focus();
 
-        // Show result after first attempt, update count on subsequent
+        // Show result
         if (pairAttempts.length >= 1) {
             $('attemptCount').textContent = pairAttempts.length;
             $('angle2Result').classList.remove('hidden');
@@ -278,7 +278,7 @@
         }
     }
 
-    // --- Gallery 3: The Question (input + table) ---
+    // Gallery 3: Question
     function initGallery3() {
         const input = $('numberInput');
         const addBtn = $('addNumber');
@@ -333,7 +333,7 @@
     }
 
     function showTable() {
-        // Hide input area, show a summary instead
+        // Hide input area
         const inputZone = $('numberInput').closest('.input-zone');
         if (inputZone) inputZone.classList.add('hidden');
         $('tableContainer').classList.remove('hidden');
@@ -347,7 +347,7 @@
         container.innerHTML = '';
         let rowsShown = 0;
 
-        // Remove any previous scroll handler
+        // Remove previous handler
         if (tableScrollHandler) {
             container.removeEventListener('scroll', tableScrollHandler);
         }
@@ -392,7 +392,7 @@
         container.addEventListener('scroll', tableScrollHandler);
 
         $('proceed3b').onclick = () => {
-            // Re-initialize diagonal table with user's numbers now available
+            // Re-initialize diagonal
             initTableData();
             buildDiagonalTable();
             // Reset diagonal steps
@@ -410,7 +410,7 @@
         };
     }
 
-    // --- Gallery 4: The Diagonal ---
+    // Gallery 4: Diagonal
     function initGallery4() {
         initTableData();
         buildDiagonalTable();
@@ -649,7 +649,7 @@
         result.className = 'check-result nomatch';
     }
 
-    // --- Gallery 5 & 6: Reveal on Scroll ---
+    // Gallery 5 // --- Gallery 5 & 6: Reveal on Scroll --- 6: Reveal
     function initGallery5() {
         const lines = document.querySelectorAll('#gallery-5 .reveal');
         const observer = new IntersectionObserver((entries) => {
@@ -680,7 +680,7 @@
         observer.observe($('gallery-6'));
     }
 
-    // --- Nav Progress ---
+    // Nav
     function initNavProgress() {
         const galleries = document.querySelectorAll('.gallery');
         const nav = $('navProgress');
@@ -696,7 +696,7 @@
         galleries.forEach(g => observer.observe(g));
     }
 
-    // --- Init All ---
+    // Init
     document.addEventListener('DOMContentLoaded', () => {
         initGallery1();
         initGallery2();
@@ -706,7 +706,7 @@
         initGallery6();
         initNavProgress();
 
-        // Reset logic for "从头看一遍"
+        // Reset
         const resetLink = document.querySelector('.exhibit-end a[href="#gallery-1"]');
         if (resetLink) {
             resetLink.addEventListener('click', (e) => {

@@ -1,31 +1,40 @@
-# Uncountable
+# Uncountable · 康托对角线证明互动展
 
-> A museum-grade interactive exhibit on Cantor's diagonal proof — demonstrating the uncountability of real numbers.
->
-> [Launch Exhibit →](https://agent-vik.github.io/uncountable)
+一个博物馆级单页互动展品，让观众亲手触摸数学史上最优雅的证明——康托对角线论证。
 
-## About
+## 展览
 
-This is a contribution to [Victor42](https://victor42.eth.limo)'s second ideal: building a museum of the history of science. It presents one of mathematics' most elegant proofs — Georg Cantor's diagonal argument (1891) — not as a textbook lemma, but as a participatory museum experience.
+六个展厅，从直觉到震撼：
 
-No mathematical background is assumed. The exhibit starts from a question anyone can ask: *"How many numbers are there between 0 and 1?"*
+1. **直觉** — 什么是无穷？亲手计数，感受"永远加不完"
+2. **悖论** — 伽利略的困惑：平方数是自然数的子集，却能一一配对。观众亲手圈出平方数、亲手输入数字配对，自己撞出悖论
+3. **提问** — 康托问：所有的无穷都一样大吗？观众输入小数，排成表格
+4. **对角线** — 框出对角线、翻转每位数字、逐行检查。观众亲手造出一个不在表里的新数
+5. **后果** — 推导链：排不成表 → 配不上 → 更多。无穷也有大小之分
+6. **墓志铭** — 1638 年伽利略转身走开，1874 年康托走了进去
 
-## The Exhibit
+## 在线访问
 
-The story unfolds across four galleries:
+[https://agent-vik.github.io/uncountable/](https://agent-vik.github.io/uncountable/)
 
-1. **The Question** — Can you list every real number?
-2. **The Table** — Suppose someone claims to have a complete list. Let's build it.
-3. **The Diagonal** — Cantor's stroke of genius. Watch a new number emerge.
-4. **The Consequence** — That number isn't in the list. The list was never complete.
+## 技术特点
 
-## Design Principles
+- **纯静态** — 单 HTML + CSS + JS，无框架无依赖
+- **响应式** — 适配桌面端和移动端
+- **渐进式互动** — 每个展厅有可操作的交互装置
+- **SEO** — 完整 meta 标签、Schema.org 结构化数据、站点地图
 
-- **Museum-grade narrative**: Each scroll reveals one idea. No information overload.
-- **Everyone is welcome**: Math notation kept minimal. Visual intuition first.
-- **Participatory**: You don't just read — you click, drag, and build the proof yourself.
-- **Elegant under constraint**: A single HTML file with no framework, no build step, no dependencies beyond KaTeX for math rendering.
+## 项目结构
 
-## License
+```
+index.html      页面结构
+styles.css      样式
+script.js       交互逻辑
+assets/         肖像图片
+robots.txt      爬虫规则
+sitemap.xml     站点地图
+```
 
-MIT © 2026 Agent Vik
+## 作者
+
+Created by [Victor42](https://victor42.work) & [Vik](https://github.com/agent-vik/about-me)

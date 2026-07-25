@@ -1,4 +1,4 @@
-/* === Uncountable — Museum-grade Interactive Exhibit === */
+/* Uncountable — Interactive Exhibit */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -32,7 +32,7 @@ body {
     overflow-x: hidden;
 }
 
-/* --- Nav Bar --- */
+/* Nav Bar */
 .nav-bar {
     position: fixed; top: 0; left: 0; right: 0;
     display: flex; justify-content: space-between; align-items: center;
@@ -56,7 +56,7 @@ body {
     font-size: 0.8rem;
 }
 
-/* --- Gallery Sections --- */
+/* Gallery Sections */
 .gallery {
     min-height: 100vh;
     display: flex; flex-direction: column;
@@ -90,7 +90,7 @@ body {
     margin-bottom: 48px;
 }
 
-/* --- Hero Question --- */
+/* Hero Question */
 .hero-question { text-align: center; padding: 40px 0 32px; }
 .hero-text {
     font-family: var(--serif);
@@ -100,7 +100,7 @@ body {
     line-height: 1.4;
 }
 
-/* --- Narration Block --- */
+/* Narration Block */
 .narration-block {
     margin: 24px 0;
     text-align: center;
@@ -135,7 +135,7 @@ body {
     font-weight: 600;
 }
 
-/* --- Count Zone (Gallery 1) --- */
+/* Count Zone */
 .count-zone {
     text-align: center;
     margin: 32px 0;
@@ -162,7 +162,7 @@ body {
     line-height: 1.6;
 }
 
-/* --- Count Buttons --- */
+/* Count Buttons */
 .count-buttons {
     display: flex;
     gap: 12px 8px;
@@ -175,7 +175,7 @@ body {
     padding: 10px 16px;
 }
 
-/* --- Number Grid (Angle 1) --- */
+/* Number Grid */
 .number-grid {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
@@ -259,7 +259,7 @@ body {
     margin-top: 8px;
 }
 
-/* --- Pair Test Zone (Angle 2) --- */
+/* Pair Test Zone */
 .pair-test-zone {
     margin: 24px 0;
     text-align: center;
@@ -308,7 +308,7 @@ body {
     max-width: 100%;
 }
 
-/* --- Sub-screen (within a gallery) --- */
+/* Sub-screen */
 .sub-screen {
     padding: 40px 0;
     border-top: 1px solid rgba(212, 165, 116, 0.06);
@@ -369,7 +369,7 @@ body {
     margin: 24px 0;
 }
 
-/* --- Ratio Demo --- */
+/* Ratio Demo */
 .ratio-demo {
     margin: 32px auto;
     max-width: 480px;
@@ -416,7 +416,7 @@ input[type=range] {
     accent-color: var(--gold);
 }
 
-/* --- Collision Zone --- */
+/* Collision Zone */
 .collision-zone {
     display: flex;
     gap: 20px;
@@ -467,7 +467,7 @@ input[type=range] {
     font-style: italic;
 }
 
-/* --- Pair Zone (Gallery 2) --- */
+/* Pair Zone */
 .pair-zone {
     display: flex; gap: 24px;
     justify-content: center;
@@ -504,7 +504,7 @@ input[type=range] {
     color: var(--text);
     transition: all 0.4s ease;
 }
-/* --- Scroll Hint --- */
+/* Scroll Hint */
 .scroll-hint {
     position: absolute; bottom: 30px; left: 50%;
     transform: translateX(-50%);
@@ -517,7 +517,7 @@ input[type=range] {
     50% { transform: translateX(-50%) translateY(8px); }
 }
 
-/* --- Narration Text --- */
+/* Narration Text */
 .narration-text {
     text-align: center;
     color: var(--text);
@@ -526,7 +526,7 @@ input[type=range] {
     margin: 24px 0;
 }
 
-/* --- Quote --- */
+/* Quote */
 blockquote.quote {
     margin: 16px 0;
     padding: 16px 24px;
@@ -541,7 +541,7 @@ blockquote.quote {
     text-align: center;
 }
 
-/* --- Input Zone --- */
+/* Input Zone */
 .input-zone { margin-top: 24px; text-align: center; }
 .instruction {
     color: var(--text-dim);
@@ -567,7 +567,7 @@ input[type="text"] {
 }
 input[type="text"]:focus { border-color: var(--gold-dim); }
 
-/* --- Buttons --- */
+/* Buttons */
 .btn-primary, .btn-secondary, .btn-ghost {
     padding: 12px 28px;
     border: none; border-radius: 4px;
@@ -593,7 +593,7 @@ input[type="text"]:focus { border-color: var(--gold-dim); }
 }
 .btn-ghost:hover { color: var(--text); border-color: var(--text-dim); }
 
-/* --- Number List --- */
+/* Number List */
 .number-list {
     margin: 24px auto; max-width: 480px; min-height: 60px;
     display: flex; flex-wrap: wrap; gap: 8px;
@@ -627,14 +627,14 @@ input[type="text"]:focus { border-color: var(--gold-dim); }
 }
 .number-chip .remove:hover { color: var(--error); }
 
-/* --- Counter & Proceed --- */
+/* Counter */
 .counter-row {
     display: flex; justify-content: space-between; align-items: center;
     margin-top: 24px; max-width: 480px; margin-left: auto; margin-right: auto;
 }
 .counter { color: var(--text-dim); font-size: 0.85rem; font-family: var(--mono); }
 
-/* --- Infinite Table --- */
+/* Infinite Table */
 .table-container { margin: 32px 0; }
 .table-claim {
     text-align: center;
@@ -683,7 +683,7 @@ input[type="text"]:focus { border-color: var(--gold-dim); }
     font-style: italic;
 }
 
-/* --- Diagonal Table --- */
+/* Diagonal Table */
 .diagonal-table-container {
     overflow-x: auto;
     margin: 24px 0;
@@ -732,7 +732,7 @@ td.ellipsis-cell {
     border: 1px solid rgba(58, 56, 51, 0.2);
 }
 
-/* --- Step Controls --- */
+/* Step Controls */
 .step { margin: 24px 0; text-align: center; }
 .step-controls {
     display: flex; gap: 12px; justify-content: center;
@@ -745,7 +745,7 @@ td.ellipsis-cell {
     margin-top: 12px;
 }
 
-/* --- Diagonal Extract --- */
+/* Diagonal Extract */
 .diagonal-extract {
     display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
     margin: 24px 0;
@@ -767,7 +767,7 @@ td.ellipsis-cell {
     to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* --- Flip Zone --- */
+/* Flip Zone */
 .flip-zone {
     display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
     margin: 24px 0;
@@ -813,7 +813,7 @@ td.ellipsis-cell {
 .new-number-display .label { color: var(--text-dim); font-size: 0.85rem; margin-right: 8px; }
 .new-number-display .new-number { color: var(--gold-bright); font-weight: 700; letter-spacing: 0.05em; }
 
-/* --- Check Table --- */
+/* Check Table */
 .check-table { margin: 24px 0; overflow-x: auto; }
 .check-row {
     display: flex; align-items: center; gap: 12px;
@@ -845,7 +845,7 @@ td.ellipsis-cell {
 }
 .conclusion-text strong { color: var(--error); }
 
-/* --- Infinity Comparison (Gallery 5) --- */
+/* Infinity Comparison */
 .infinity-comparison {
     display: flex;
     gap: 20px;
@@ -920,7 +920,7 @@ td.ellipsis-cell {
     font-style: italic;
 }
 
-/* --- Portraits (Gallery 6) --- */
+/* Portraits */
 .portrait {
     width: 120px;
     height: 120px;
@@ -932,7 +932,7 @@ td.ellipsis-cell {
     opacity: 0.85;
 }
 
-/* --- Conclusion Sequence --- */
+/* Conclusion Sequence */
 .conclusion-sequence { max-width: 560px; margin: 0 auto; text-align: center; }
 .conclusion-line {
     font-family: var(--sans);
@@ -984,7 +984,7 @@ td.ellipsis-cell {
 .exhibit-end { text-align: center; margin-top: 48px; }
 .exhibit-end a { text-decoration: none; }
 
-/* --- Site Footer --- */
+/* Site Footer */
 .site-footer {
     display: block;
     margin-top: 60px;
@@ -997,10 +997,10 @@ td.ellipsis-cell {
 .site-footer .copyright a { color: var(--gold-dim); text-decoration: none; transition: color 0.3s; }
 .site-footer .copyright a:hover { color: var(--gold); }
 
-/* --- Utilities --- */
+/* Utilities */
 .hidden { display: none !important; }
 
-/* --- Responsive --- */
+/* Responsive */
 @media (max-width: 600px) {
     .gallery { padding: 100px 16px 60px; }
     .input-row { flex-direction: column; align-items: center; }

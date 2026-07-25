@@ -4,17 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0a0a0f">
-    <meta property="og:title" content="Uncountable · 康托对角线证明互动展">
-    <meta property="og:description" content="在博物馆级体验中亲手触摸数学史最优雅的证明。">
+    <meta name="description" content="康托对角线证明互动展品 — 在博物馆级体验中亲手触摸数学史最优雅的证明。六个展厅，从伽利略的悖论到康托的天才一击，亲手发现无穷不止一种。">
+    <meta name="keywords" content="康托, 对角线, 对角线证明, 不可数, 无穷, 伽利略悖论, 集合论, 数学证明, 互动展品, Cantor's diagonal argument, uncountable, infinity, mathematics">
+    <meta name="author" content="Agent Vik & Victor42">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://agent-vik.github.io/uncountable/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://agent-vik.github.io/uncountable/">
-    <meta name="description" content="康托对角线证明互动展品 — 在博物馆级体验中亲手触摸数学史最优雅的证明。">
+    <meta property="og:title" content="Uncountable · 康托对角线证明互动展">
+    <meta property="og:description" content="在博物馆级体验中亲手触摸数学史最优雅的证明。六个展厅，从伽利略的悖论到康托的天才一击。">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://agent-vik.github.io/uncountable/">
+    <meta name="twitter:title" content="Uncountable · 康托对角线证明互动展">
+    <meta name="twitter:description" content="在博物馆级体验中亲手触摸数学史最优雅的证明。亲手发现无穷不止一种。">
     <title>Uncountable · 康托对角线证明互动展</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=5">
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='10' cy='10' r='8' fill='%23d4a574'/><circle cx='30' cy='30' r='8' fill='%23d4a574' opacity='0.7'/><circle cx='50' cy='50' r='8' fill='%23d4a574' opacity='0.5'/><circle cx='70' cy='70' r='8' fill='%23d4a574' opacity='0.3'/><circle cx='90' cy='90' r='8' fill='%23d4a574' opacity='0.15'/></svg>">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Uncountable · 康托对角线证明互动展",
+        "alternateName": "Cantor's Diagonal Argument Interactive Exhibit",
+        "url": "https://agent-vik.github.io/uncountable/",
+        "description": "康托对角线证明互动展品 — 在博物馆级体验中亲手触摸数学史最优雅的证明。",
+        "inLanguage": "zh-CN",
+        "author": {
+            "@type": "Organization",
+            "name": "Agent Vik & Victor42",
+            "url": "https://victor42.work"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "什么是康托对角线证明？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "康托对角线证明是数学家格奥尔格·康托尔在1874年提出的论证，证明了0到1之间的实数比自然数更多。它通过构造一个对角线上的新数字，证明无论你怎么排列，总有一个数字不在表里。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "什么是伽利略悖论？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "1638年，伽利略发现完全平方数是自然数的一部分，但两者却能一一配对。他由此得出'无限不可比较'的结论。250年后康托重新审视这个悖论，发现无穷之间确实有大小之分。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "无穷之间真的有大小之分吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "是的。自然数和小数都是无穷多的，但0到1之间的小数比所有自然数还要多。能一一配对的两个无穷一样大，配不上的就更大。对角线证明就是康托用来确立这一结论的方法。"
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
 
@@ -41,7 +98,7 @@
                 <p class="key-line">一个永远加不完的序列。</p>
             </div>
 
-            <!-- Interactive: keep counting -->
+            
             <div class="count-zone">
                 <p class="instruction">试试看，你能数到多少？</p>
                 <div class="count-display" id="countDisplay">0</div>
@@ -69,7 +126,7 @@
             <h2 class="gallery-title">The Paradox</h2>
             <p class="gallery-subtitle">悖论</p>
 
-            <!-- 2-1: Introduce the two sequences -->
+            
             <div class="narration-block">
                 <p>1638 年，<strong>伽利略</strong>比较了两串数字。</p>
                 <p>第一串，是自然数——从 1 开始，每个数加 1：</p>
@@ -93,7 +150,7 @@
 
             <div class="scroll-hint-static">向下滚动 ↓</div>
 
-            <!-- 2-2: Angle 1 — circle the squares -->
+            
             <div class="sub-screen" id="angle-1">
                 <div class="angle-badge">角度一</div>
                 <h3 class="angle-title">亲手数一数：平方数有多少？</h3>
@@ -150,7 +207,7 @@
                 <button type="button" id="toAngle2" class="btn-secondary hidden">换一个角度看 →</button>
             </div>
 
-            <!-- 2-3: Angle 2 — try to find an unpairable number -->
+            
             <div class="sub-screen hidden" id="angle-2">
                 <div class="angle-badge">角度二</div>
                 <h3 class="angle-title">换一个角度：每个数都能配上吗？</h3>
@@ -183,7 +240,7 @@
                 <button type="button" id="toCollision" class="btn-secondary hidden">两个角度放在一起看 →</button>
             </div>
 
-            <!-- 2-4: The collision -->
+            
             <div class="sub-screen hidden" id="collision">
                 <div class="angle-badge collision">碰撞</div>
                 <h3 class="angle-title">悖论</h3>
@@ -269,7 +326,7 @@
                 <p>康托说：<em>"让我看看这张表的对角线。"</em></p>
             </div>
 
-            <!-- Step 4a: Highlight diagonal -->
+            
             <div class="step" id="step-4a">
                 <div class="diagonal-table-container">
                     <table class="diagonal-table" id="diagonalTable"></table>
@@ -281,7 +338,7 @@
                 <p class="step-hint" id="diagHint">点击按钮，看康托如何找到对角线。</p>
             </div>
 
-            <!-- Step 4b: Extract + Flip digits (merged) -->
+            
             <div class="step hidden" id="step-4b">
                 <p class="narration-text">把对角线上的数字拎出来，每个加 1。<br>如果到 9 就变成 0。</p>
                 <div class="flip-zone" id="flipZone"></div>
@@ -293,7 +350,7 @@
                 <button type="button" id="proceed4b" class="btn-primary hidden">下一步 →</button>
             </div>
 
-            <!-- Step 4d: Check rows -->
+            
             <div class="step hidden" id="step-4d">
                 <p class="narration-text">我们刚刚造了一个新的小数。它在这张表里吗？</p>
                 <div class="new-number-display pinned" style="text-align:center;">
@@ -337,7 +394,7 @@
                 <p class="conclusion-line reveal highlight">配不上——就是更多。</p>
                 <div class="conclusion-gap"></div>
 
-                <!-- Direct comparison装置 -->
+                
                 <div class="infinity-comparison">
                     <div class="inf-card left">
                         <p class="inf-card-title">自然数</p>
@@ -407,6 +464,6 @@
 
 </main>
 
-<script src="script.js?v=5"></script>
+<script src="script.js"></script>
 </body>
 </html>
