@@ -146,11 +146,12 @@ body {
 }
 .count-display {
     font-family: var(--mono);
-    font-size: 3rem;
+    font-size: clamp(1.5rem, 8vw, 3rem);
     font-weight: 700;
     color: var(--gold-bright);
     margin: 16px 0;
     transition: transform 0.15s ease;
+    word-break: break-all;
 }
 .count-display.bump { transform: scale(1.15); }
 .count-hint {
@@ -276,14 +277,19 @@ body {
     font-family: var(--mono);
     font-size: 1.2rem;
     animation: cardPop 0.4s ease;
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    word-break: break-all;
+    overflow-wrap: break-word;
 }
 @keyframes cardPop {
     from { opacity: 0; transform: scale(0.7); }
     to { opacity: 1; transform: scale(1); }
 }
-.pair-card .natural { color: var(--text); }
-.pair-card .arrow { color: var(--gold-dim); }
-.pair-card .square { color: var(--gold-bright); font-weight: 700; }
+.pair-card .natural { color: var(--text); word-break: break-all; }
+.pair-card .arrow { color: var(--gold-dim); flex-shrink: 0; }
+.pair-card .square { color: var(--gold-bright); font-weight: 700; word-break: break-all; }
 .pair-history {
     display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
     margin-top: 12px;
@@ -298,6 +304,8 @@ body {
     background: var(--bg-card);
     border: 1px solid var(--text-faint);
     border-radius: 12px;
+    word-break: break-all;
+    max-width: 100%;
 }
 
 /* --- Sub-screen (within a gallery) --- */
@@ -502,44 +510,6 @@ input[type=range] {
     font-weight: 700;
     transform: scale(1.05);
 }
-.pair-link {
-    display: flex; align-items: center; justify-content: center;
-    color: var(--gold-dim);
-    font-size: 1.2rem;
-    margin: 4px 0;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-.pair-link.visible { opacity: 1; }
-
-.pair-result {
-    margin: 24px 0;
-}
-.pair-paired {
-    display: flex; flex-direction: column; gap: 8px;
-    margin: 16px 0;
-    max-height: 200px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--gold-dim) var(--bg);
-}
-.pair-paired::-webkit-scrollbar { width: 4px; }
-.pair-paired::-webkit-scrollbar-thumb { background: var(--gold-dim); }
-.pair-row {
-    display: flex; gap: 12px; justify-content: center; align-items: center;
-    font-family: var(--mono);
-    font-size: 0.9rem;
-    padding: 4px 0;
-    animation: pairRowIn 0.3s ease;
-}
-@keyframes pairRowIn {
-    from { opacity: 0; transform: translateX(-10px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-.pair-row .natural-val { color: var(--text); }
-.pair-row .arrow { color: var(--gold-dim); }
-.pair-row .square-val { color: var(--gold-bright); font-weight: 700; }
-
 /* --- Scroll Hint --- */
 .scroll-hint {
     position: absolute; bottom: 30px; left: 50%;

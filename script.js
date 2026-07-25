@@ -143,6 +143,7 @@
             $('collision').classList.remove('hidden');
             $('collision').scrollIntoView({ behavior: 'smooth', block: 'start' });
         };
+        $('proceed2').onclick = () => $('gallery-3').scrollIntoView({ behavior: 'smooth' });
     }
 
     function initNumberGrid() {
@@ -174,9 +175,6 @@
         $('statFound').textContent = gridSelected.size;
         $('statMissed').textContent = GRID_SIZE - gridSelected.size;
         $('statWrong').textContent = '—';
-        if (gridSelected.size > 0 && !$('checkGrid').classList.contains('hidden') === false) {
-            $('checkGrid').classList.remove('hidden');
-        }
         if (gridSelected.size > 0) {
             $('checkGrid').classList.remove('hidden');
         }
@@ -226,9 +224,15 @@
             result.innerHTML = '<p style="color:var(--error)">请输入一个正整数。</p>';
             return;
         }
+        if (n > 1e6) {
+            result.innerHTML = '<p style="color:var(--gold-dim)">这个数太大了，但别担心——不管多大的数，它的平方都存在。试试小一点的？</p>';
+            input.value = '';
+            input.focus();
+            return;
+        }
 
         const sq = n * n;
-        pairAttempts.push({ n, sq: n * n });
+        pairAttempts.push({ n, sq });
 
         result.innerHTML = `<div class="pair-card"><span class="natural">${n.toLocaleString('zh-CN')}</span><span class="arrow">→</span><span class="square">${sq.toLocaleString('zh-CN')}</span></div>`;
 
@@ -300,21 +304,24 @@
     }
 
     function showTable() {
-        // Fade out the input area, keep the table visible
+        // Hide input area, show a summary instead
         const inputZone = $('numberInput').closest('.input-zone');
-        if (inputZone) {
-            inputZone.style.opacity = '0.25';
-            inputZone.style.pointerEvents = 'none';
-        }
+        if (inputZone) inputZone.classList.add('hidden');
         $('tableContainer').classList.remove('hidden');
         $('proceed3b').classList.remove('hidden');
         buildInfiniteTable();
     }
 
+    let tableScrollHandler = null;
     function buildInfiniteTable() {
         const container = $('infiniteTable');
         container.innerHTML = '';
         let rowsShown = 0;
+
+        // Remove any previous scroll handler
+        if (tableScrollHandler) {
+            container.removeEventListener('scroll', tableScrollHandler);
+        }
 
         function addRows(count) {
             for (let i = 0; i < count && rowsShown < INFINITE_TABLE_ROWS; i++) {
@@ -337,11 +344,12 @@
         }
 
         addRows(20);
-        container.addEventListener('scroll', () => {
+        tableScrollHandler = () => {
             if (container.scrollTop + container.clientHeight >= container.scrollHeight - 50) {
                 addRows(10);
             }
-        });
+        };
+        container.addEventListener('scroll', tableScrollHandler);
 
         $('proceed3b').onclick = () => $('gallery-4').scrollIntoView({ behavior: 'smooth' });
     }
@@ -433,12 +441,7 @@
     }
 
     function stepNextDiag() {
-        if (currentDiagStep >= TABLE_ROWS) {
-            $('diagHint').textContent = '对角线全部框出完毕。';
-            $('step-4b').classList.remove('hidden');
-            extractDiagonal();
-            return;
-        }
+        if (currentDiagStep >= TABLE_ROWS) return;
         const i = currentDiagStep;
         const cell = $(`cell-${i}-${i}`);
         if (cell) {
@@ -509,10 +512,15 @@
         });
     }
 
+    let flipAllInProgress = false;
     function flipAllDigits() {
+        if (flipAllInProgress) return;
+        flipAllInProgress = true;
         const cards = document.querySelectorAll('#flipZone .flip-card');
+        let pending = 0;
         cards.forEach((card, i) => {
             if (!card.classList.contains('flipped')) {
+                pending++;
                 setTimeout(() => {
                     card.classList.add('flipped');
                     flippedDigits.push({ index: i, original: diagonalDigits[i], flipped: flipDigit(diagonalDigits[i]) });
@@ -520,9 +528,12 @@
                     if (flippedDigits.length === diagonalDigits.length) {
                         $('proceed4c').classList.remove('hidden');
                     }
+                    pending--;
+                    if (pending === 0) flipAllInProgress = false;
                 }, i * 150);
             }
         });
+        if (pending === 0) flipAllInProgress = false;
     }
 
     function updateNewNumber() {
@@ -536,9 +547,6 @@
         const container = $('checkTable');
         container.innerHTML = '';
         currentCheckRow = 0;
-
-        const sorted = flippedDigits.slice().sort((a, b) => a.index - b.index);
-        const newDigits = sorted.map(d => d.flipped);
 
         for (let i = 0; i < TABLE_ROWS; i++) {
             const row = el('div', 'check-row');
