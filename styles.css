@@ -824,7 +824,7 @@ td.ellipsis-cell {
     transition: all 0.4s ease;
     flex-wrap: wrap;
 }
-.check-row.checked { opacity: 0.6; }
+.check-row.checked { opacity: 0.75; }
 .check-row.checked .highlight-digit { color: var(--error); }
 .check-row .check-num { color: var(--gold-dim); min-width: 60px; font-size: 0.75rem; }
 .check-row .check-digits { color: var(--text); flex: 1; }
@@ -965,11 +965,11 @@ td.ellipsis-cell {
     padding: 24px 16px;
     border-top: 1px solid var(--gold-dim);
     border-bottom: 1px solid var(--gold-dim);
-    background: rgba(212, 165, 116, 0.02);
+    background: rgba(212, 165, 116, 0.05);
 }
 .final-epitaph p {
     font-family: var(--serif);
-    color: var(--text-dim);
+    color: var(--text);
     font-size: 1.05rem;
     line-height: 1.8;
 }
