@@ -399,12 +399,12 @@
             currentDiagStep = 0;
             flippedDigits = [];
             currentCheckRow = 0;
-            ['step-4b', 'step-4c', 'step-4d'].forEach(id => { if ($(id)) $(id).classList.add('hidden'); });
+            ['step-4b', 'step-4d'].forEach(id => { if ($(id)) $(id).classList.add('hidden'); });
             if ($('step-4a')) $('step-4a').classList.remove('hidden');
             if ($('diagHint')) $('diagHint').textContent = '点击按钮，看康托如何找到对角线。';
             if ($('newNumber')) $('newNumber').textContent = '0.';
             if ($('checkConclusion')) $('checkConclusion').classList.add('hidden');
-            if ($('proceed4c')) $('proceed4c').classList.add('hidden');
+            if ($('proceed4b')) $('proceed4b').classList.add('hidden');
             if ($('proceed4d')) $('proceed4d').classList.add('hidden');
             $('gallery-4').scrollIntoView({ behavior: 'smooth' });
         };
@@ -416,9 +416,8 @@
         buildDiagonalTable();
         $('nextDiag').onclick = stepNextDiag;
         $('autoDiag').onclick = autoPlayDiag;
-        $('proceed4b').onclick = () => showStep('step-4c', 'step-4b');
+        $('proceed4b').onclick = () => showStep('step-4d', 'step-4b');
         $('flipAll').onclick = flipAllDigits;
-        $('proceed4c').onclick = () => showStep('step-4d', 'step-4c');
         $('checkNext').onclick = () => checkNextRow();
         $('checkAll').onclick = () => checkAllRows();
         $('proceed4d').onclick = () => $('gallery-5').scrollIntoView({ behavior: 'smooth' });
@@ -509,6 +508,7 @@
             $('diagHint').textContent = '对角线全部框出完毕。';
             $('step-4b').classList.remove('hidden');
             extractDiagonal();
+            initFlipZone();
         }
     }
 
@@ -522,21 +522,15 @@
     }
 
     function extractDiagonal() {
-        const container = $('diagonalExtract');
-        container.innerHTML = '';
         diagonalDigits = [];
         for (let i = 0; i < TABLE_ROWS; i++) {
             diagonalDigits.push(tableData[i][i]);
-            const card = el('div', 'extract-card', tableData[i][i]);
-            card.style.animationDelay = (i * 0.1) + 's';
-            container.appendChild(card);
         }
     }
 
     function showStep(showId, hideId) {
         $(hideId).classList.add('hidden');
         $(showId).classList.remove('hidden');
-        if (showId === 'step-4c') initFlipZone();
         if (showId === 'step-4d') {
             $('newNumberPinned').textContent = $('newNumber').textContent;
             initCheckTable();
@@ -562,7 +556,7 @@
                     flippedDigits.push({ index: i, original: d, flipped: flipDigit(d) });
                     updateNewNumber();
                     if (flippedDigits.length === diagonalDigits.length) {
-                        $('proceed4c').classList.remove('hidden');
+                        $('proceed4b').classList.remove('hidden');
                     }
                 }
             };
@@ -584,7 +578,7 @@
                     flippedDigits.push({ index: i, original: diagonalDigits[i], flipped: flipDigit(diagonalDigits[i]) });
                     updateNewNumber();
                     if (flippedDigits.length === diagonalDigits.length) {
-                        $('proceed4c').classList.remove('hidden');
+                        $('proceed4b').classList.remove('hidden');
                     }
                     pending--;
                     if (pending === 0) flipAllInProgress = false;
@@ -755,12 +749,12 @@
                 currentCheckRow = 0;
                 initTableData();
                 buildDiagonalTable();
-                ['step-4b', 'step-4c', 'step-4d'].forEach(id => { if ($(id)) $(id).classList.add('hidden'); });
+                ['step-4b', 'step-4d'].forEach(id => { if ($(id)) $(id).classList.add('hidden'); });
                 if ($('step-4a')) $('step-4a').classList.remove('hidden');
                 if ($('diagHint')) $('diagHint').textContent = '点击按钮，看康托如何找到对角线。';
                 if ($('newNumber')) $('newNumber').textContent = '0.';
                 if ($('checkConclusion')) $('checkConclusion').classList.add('hidden');
-                if ($('proceed4c')) $('proceed4c').classList.add('hidden');
+                if ($('proceed4b')) $('proceed4b').classList.add('hidden');
                 if ($('proceed4d')) $('proceed4d').classList.add('hidden');
 
                 // Reset Gallery 5 & 6 reveal

@@ -276,28 +276,21 @@
                 </div>
                 <div class="step-controls">
                     <button type="button" id="nextDiag" class="btn-primary">框出下一个对角线数字</button>
-                    <button type="button" id="autoDiag" class="btn-ghost">自动播放</button>
+                    <button type="button" id="autoDiag" class="btn-ghost">自动查找</button>
                 </div>
                 <p class="step-hint" id="diagHint">点击按钮，看康托如何找到对角线。</p>
             </div>
 
-            <!-- Step 4b: Extract diagonal -->
+            <!-- Step 4b: Extract + Flip digits (merged) -->
             <div class="step hidden" id="step-4b">
-                <p class="narration-text">把对角线上的数字单独拎出来：</p>
-                <div class="diagonal-extract" id="diagonalExtract"></div>
-                <button type="button" id="proceed4b" class="btn-primary">下一步 →</button>
-            </div>
-
-            <!-- Step 4c: Flip digits -->
-            <div class="step hidden" id="step-4c">
-                <p class="narration-text">现在，把每一个数字都改一下。规则很简单：<br>每个数字加 1，如果到 9 就变成 0。</p>
+                <p class="narration-text">把对角线上的数字拎出来，每个加 1。<br>如果到 9 就变成 0。</p>
                 <div class="flip-zone" id="flipZone"></div>
                 <div class="new-number-display">
                     <span class="label">新数字：</span>
                     <span class="new-number" id="newNumber">0.</span>
                 </div>
                 <button type="button" id="flipAll" class="btn-ghost">全部翻转</button>
-                <button type="button" id="proceed4c" class="btn-primary hidden">下一步 →</button>
+                <button type="button" id="proceed4b" class="btn-primary hidden">下一步 →</button>
             </div>
 
             <!-- Step 4d: Check rows -->

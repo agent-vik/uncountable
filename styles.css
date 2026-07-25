@@ -709,6 +709,7 @@ table.diagonal-table td {
 table.diagonal-table .row-label {
     color: var(--gold-dim); font-size: 0.75rem; width: 50px;
     border: none; padding-right: 8px; text-align: right;
+    white-space: nowrap;
 }
 table.diagonal-table .decimal-prefix {
     color: var(--text-dim); border: none; padding-right: 4px;
