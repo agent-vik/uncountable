@@ -824,7 +824,8 @@ td.ellipsis-cell {
     transition: all 0.4s ease;
     flex-wrap: wrap;
 }
-.check-row.checked { opacity: 0.3; }
+.check-row.checked { opacity: 0.6; }
+.check-row.checked .highlight-digit { color: var(--error); }
 .check-row .check-num { color: var(--gold-dim); min-width: 60px; font-size: 0.75rem; }
 .check-row .check-digits { color: var(--text); flex: 1; }
 .check-row .check-result { font-size: 0.85rem; }
