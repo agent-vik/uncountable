@@ -433,6 +433,15 @@ table.diagonal-table td.diagonal-extracted {
     letter-spacing: 0.05em;
 }
 
+.new-number-display.pinned {
+    margin-bottom: 24px;
+    padding: 12px 24px;
+    background: rgba(212, 165, 116, 0.05);
+    border: 1px solid rgba(212, 165, 116, 0.2);
+    border-radius: 4px;
+    display: inline-block;
+}
+
 /* --- Check Table --- */
 .check-table {
     margin: 24px 0;

@@ -247,7 +247,11 @@
         $(hideId).classList.add('hidden');
         $(showId).classList.remove('hidden');
         if (showId === 'step-3c') initFlipZone();
-        if (showId === 'step-3d') initCheckTable();
+        if (showId === 'step-3d') {
+            // Copy the new number to the pinned display
+            $('newNumberPinned').textContent = $('newNumber').textContent;
+            initCheckTable();
+        }
     }
 
     function initFlipZone() {
