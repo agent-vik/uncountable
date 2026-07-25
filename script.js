@@ -42,8 +42,23 @@
         }
     }
 
-    // --- Gallery 1: Intuition (fade-in narration) ---
+    // --- Gallery 1: Intuition (counting interaction + fade-in) ---
     function initGallery1() {
+        let count = 0;
+        const display = $('countDisplay');
+        const btn = $('countBtn');
+        const hint = $('countHint');
+
+        btn.onclick = () => {
+            count++;
+            display.textContent = count;
+            display.classList.add('bump');
+            setTimeout(() => display.classList.remove('bump'), 150);
+            if (count >= 10 && hint.classList.contains('hidden')) {
+                hint.classList.remove('hidden');
+            }
+        };
+
         const fadeEls = document.querySelectorAll('#gallery-1 .fade-in');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -177,8 +192,7 @@
     }
 
     function showTable() {
-        $('numberList').parentElement.classList.add('hidden');
-        $('counterRow')?.classList.add('hidden');
+        $('numberList').parentElement.style.display = 'none';
         $('tableContainer').classList.remove('hidden');
         $('proceed3b').classList.remove('hidden');
         buildInfiniteTable();

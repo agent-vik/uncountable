@@ -135,6 +135,32 @@ body {
     font-weight: 600;
 }
 
+/* --- Count Zone (Gallery 1) --- */
+.count-zone {
+    text-align: center;
+    margin: 32px 0;
+    padding: 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--text-faint);
+    border-radius: 8px;
+}
+.count-display {
+    font-family: var(--mono);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--gold-bright);
+    margin: 16px 0;
+    transition: transform 0.15s ease;
+}
+.count-display.bump { transform: scale(1.15); }
+.count-hint {
+    margin-top: 16px;
+    color: var(--gold-dim);
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.6;
+}
+
 /* --- Pair Zone (Gallery 2) --- */
 .pair-zone {
     display: flex; gap: 24px;

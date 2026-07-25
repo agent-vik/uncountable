@@ -36,6 +36,14 @@
                 <p class="key-line">一个永远加不完的序列。</p>
             </div>
 
+            <!-- Interactive: keep counting -->
+            <div class="count-zone">
+                <p class="instruction">试试看，你能数到多少？</p>
+                <div class="count-display" id="countDisplay">0</div>
+                <button id="countBtn" class="btn-primary">+1</button>
+                <p class="count-hint hidden" id="countHint">你可以永远数下去……<br>但你能说它“已经数完了”吗？</p>
+            </div>
+
             <div class="narration-block fade-in">
                 <p>1638 年，有个人发现了一件奇怪的事……</p>
             </div>
@@ -111,7 +119,7 @@
                 <div class="number-list" id="numberList">
                     <p class="empty-hint">你的列表是空的。开始写吧。</p>
                 </div>
-                <div class="counter-row">
+                <div class="counter-row" id="counterRow">
                     <span class="counter" id="counter">你已收集了 0 个数字</span>
                     <button id="proceed3" class="btn-secondary hidden">假设已经写完了 →</button>
                 </div>
