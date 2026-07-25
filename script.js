@@ -36,9 +36,24 @@
         return e;
     }
 
+    // Parse a decimal string into an array of digits (padded/truncated to DECIMAL_PLACES)
+    function parseDecimalDigits(str) {
+        let s = str.replace(/^0\./, '').replace(/\.$/, '');
+        let digits = [];
+        for (let i = 0; i < DECIMAL_PLACES; i++) {
+            digits.push(i < s.length ? parseInt(s[i], 10) || 0 : 0);
+        }
+        return digits;
+    }
+
     function initTableData() {
         tableData = [];
-        for (let i = 0; i < TABLE_ROWS; i++) {
+        // First rows: user's input numbers
+        userNumbers.forEach(num => {
+            tableData.push(parseDecimalDigits(num));
+        });
+        // Fill remaining rows with random digits
+        for (let i = tableData.length; i < TABLE_ROWS; i++) {
             let digits = [];
             for (let j = 0; j < DECIMAL_PLACES; j++) digits.push(randDigit());
             tableData.push(digits);
@@ -330,11 +345,22 @@
             container.removeEventListener('scroll', tableScrollHandler);
         }
 
+        function formatRow(num) {
+            let s = num.replace(/^0\./, '');
+            while (s.length < DECIMAL_PLACES) s += '0';
+            return '0.' + s.substring(0, DECIMAL_PLACES) + '…';
+        }
+
         function addRows(count) {
             for (let i = 0; i < count && rowsShown < INFINITE_TABLE_ROWS; i++) {
                 const row = el('div', 'table-row');
                 row.appendChild(el('span', 'row-num', `第 ${rowsShown + 1} 行`));
-                row.appendChild(el('span', 'row-val', randDecimal() + '…'));
+                const val = rowsShown < userNumbers.length
+                    ? formatRow(userNumbers[rowsShown])
+                    : randDecimal() + '…';
+                const valEl = el('span', 'row-val', val);
+                if (rowsShown < userNumbers.length) valEl.style.color = 'var(--gold-bright)';
+                row.appendChild(valEl);
                 container.appendChild(row);
                 rowsShown++;
             }
@@ -358,7 +384,23 @@
         };
         container.addEventListener('scroll', tableScrollHandler);
 
-        $('proceed3b').onclick = () => $('gallery-4').scrollIntoView({ behavior: 'smooth' });
+        $('proceed3b').onclick = () => {
+            // Re-initialize diagonal table with user's numbers now available
+            initTableData();
+            buildDiagonalTable();
+            // Reset diagonal steps
+            currentDiagStep = 0;
+            flippedDigits = [];
+            currentCheckRow = 0;
+            ['step-4b', 'step-4c', 'step-4d'].forEach(id => { if ($(id)) $(id).classList.add('hidden'); });
+            if ($('step-4a')) $('step-4a').classList.remove('hidden');
+            if ($('diagHint')) $('diagHint').textContent = '点击按钮，看康托如何找到对角线。';
+            if ($('newNumber')) $('newNumber').textContent = '0.';
+            if ($('checkConclusion')) $('checkConclusion').classList.add('hidden');
+            if ($('proceed4c')) $('proceed4c').classList.add('hidden');
+            if ($('proceed4d')) $('proceed4d').classList.add('hidden');
+            $('gallery-4').scrollIntoView({ behavior: 'smooth' });
+        };
     }
 
     // --- Gallery 4: The Diagonal ---
