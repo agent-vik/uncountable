@@ -46,18 +46,20 @@
     function initGallery1() {
         let count = 0;
         const display = $('countDisplay');
-        const btn = $('countBtn');
         const hint = $('countHint');
 
-        btn.onclick = () => {
-            count++;
-            display.textContent = count;
-            display.classList.add('bump');
-            setTimeout(() => display.classList.remove('bump'), 150);
-            if (count >= 10 && hint.classList.contains('hidden')) {
-                hint.classList.remove('hidden');
-            }
-        };
+        document.querySelectorAll('.count-btn').forEach(btn => {
+            btn.onclick = () => {
+                const add = parseInt(btn.dataset.add, 10);
+                count += add;
+                display.textContent = count.toLocaleString('zh-CN');
+                display.classList.add('bump');
+                setTimeout(() => display.classList.remove('bump'), 150);
+                if (count >= 10 && hint.classList.contains('hidden')) {
+                    hint.classList.remove('hidden');
+                }
+            };
+        });
 
         const fadeEls = document.querySelectorAll('#gallery-1 .fade-in');
         const observer = new IntersectionObserver((entries) => {

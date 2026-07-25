@@ -161,6 +161,17 @@ body {
     line-height: 1.6;
 }
 
+/* --- Count Buttons --- */
+.count-buttons {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    justify-content: center;
+}
+.count-btn {
+    min-width: 56px;
+    font-size: 0.85rem;
+    padding: 10px 16px;
+}
+
 /* --- Pair Zone (Gallery 2) --- */
 .pair-zone {
     display: flex; gap: 24px;
