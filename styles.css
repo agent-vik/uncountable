@@ -924,4 +924,8 @@ td.ellipsis-cell {
     .conclusion-line.big { font-size: 1.3rem; }
     .pair-zone { gap: 12px; }
     .pair-col { min-width: 140px; }
+    /* Collision: stack vertically on mobile */
+    .collision-zone { flex-direction: column; align-items: center; }
+    .collision-card { max-width: 100%; width: 100%; }
+    .collision-vs { padding: 4px 0; }
 }
