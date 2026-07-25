@@ -548,7 +548,7 @@ blockquote.quote {
 }
 
 /* --- Input Zone --- */
-.input-zone { margin-top: 24px; }
+.input-zone { margin-top: 24px; text-align: center; }
 .instruction {
     color: var(--text-dim);
     font-size: 0.95rem;
@@ -673,6 +673,7 @@ input[type="text"]:focus { border-color: var(--gold-dim); }
     font-size: 0.85rem;
     border-bottom: 1px solid rgba(58, 56, 51, 0.3);
     transition: background 0.2s;
+    flex-wrap: wrap;
 }
 .table-row:hover { background: rgba(212, 165, 116, 0.03); }
 .table-row .row-num { color: var(--gold-dim); min-width: 60px; font-size: 0.75rem; }
@@ -737,7 +738,7 @@ td.ellipsis-cell {
 }
 
 /* --- Step Controls --- */
-.step { margin: 24px 0; }
+.step { margin: 24px 0; text-align: center; }
 .step-controls {
     display: flex; gap: 12px; justify-content: center;
     margin-top: 16px;
@@ -826,6 +827,7 @@ td.ellipsis-cell {
     font-size: 0.9rem;
     border-bottom: 1px solid rgba(58, 56, 51, 0.3);
     transition: all 0.4s ease;
+    flex-wrap: wrap;
 }
 .check-row.checked { opacity: 0.3; text-decoration: line-through; }
 .check-row .check-num { color: var(--gold-dim); min-width: 60px; font-size: 0.75rem; }
@@ -917,7 +919,7 @@ td.ellipsis-cell {
 /* --- Responsive --- */
 @media (max-width: 600px) {
     .gallery { padding: 100px 16px 60px; }
-    .input-row { flex-direction: column; }
+    .input-row { flex-direction: column; align-items: center; }
     table.diagonal-table td { width: 28px; height: 28px; font-size: 0.9rem; }
     .flip-card { width: 44px; height: 44px; }
     .flip-card-front, .flip-card-back { font-size: 1.1rem; }
