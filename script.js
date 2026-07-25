@@ -3,7 +3,7 @@
     'use strict';
 
     // --- Config ---
-    const TABLE_ROWS = 12;        // visible rows in diagonal table
+    const TABLE_ROWS = 8;         // visible rows in diagonal table (must equal DECIMAL_PLACES for square diagonal)
     const DECIMAL_PLACES = 8;     // decimal places shown
     const INFINITE_TABLE_ROWS = 50; // rows in gallery 2 scrollable table
 
