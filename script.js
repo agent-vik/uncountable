@@ -234,6 +234,7 @@
     }
 
     function formatNumber(n) {
+        if (n === 0) return '0';
         const str = n.toString();
         if (str.length <= 12) return n.toLocaleString('zh-CN');
         // For very large numbers, show with scientific notation
@@ -288,11 +289,17 @@
         function addNumber() {
             let val = input.value.trim();
             if (!val) return;
-            if (!val.startsWith('0.') && !val.startsWith('.')) {
-                if (val.startsWith('0')) val = val.replace(/^0/, '0.');
+            // Normalize: ensure it's a 0.xxx format
+            if (val.startsWith('.')) val = '0' + val;
+            if (!val.startsWith('0.')) {
+                if (val.startsWith('0')) val = '0.' + val.slice(1);
                 else val = '0.' + val;
             }
-            if (val.startsWith('.')) val = '0' + val;
+            // Validate: must be 0. followed by at least one digit
+            if (!/^0\.\d+$/.test(val)) {
+                input.value = '';
+                return;
+            }
             userNumbers.push(val);
             input.value = '';
             renderList();
@@ -505,9 +512,11 @@
         }
     }
 
+    let autoPlayInterval = null;
     function autoPlayDiag() {
-        const interval = setInterval(() => {
-            if (currentDiagStep >= TABLE_ROWS) { clearInterval(interval); return; }
+        if (autoPlayInterval) return;
+        autoPlayInterval = setInterval(() => {
+            if (currentDiagStep >= TABLE_ROWS) { clearInterval(autoPlayInterval); autoPlayInterval = null; return; }
             stepNextDiag();
         }, 800);
     }
@@ -732,10 +741,8 @@
 
                 // Reset Gallery 3
                 userNumbers = [];
-                if ($('input-zone') || $('numberInput')) {
-                    const iz = $('numberInput') ? $('numberInput').closest('.input-zone') : null;
-                    if (iz) iz.classList.remove('hidden');
-                }
+                const iz = $('numberInput') ? $('numberInput').closest('.input-zone') : null;
+                if (iz) iz.classList.remove('hidden');
                 if ($('tableContainer')) $('tableContainer').classList.add('hidden');
                 if ($('proceed3')) $('proceed3').classList.add('hidden');
                 if ($('proceed3b')) $('proceed3b').classList.add('hidden');

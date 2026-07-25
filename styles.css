@@ -503,13 +503,6 @@ input[type=range] {
     color: var(--text);
     transition: all 0.4s ease;
 }
-.pair-num.paired {
-    border-color: var(--gold);
-    background: rgba(212, 165, 116, 0.1);
-    color: var(--gold-bright);
-    font-weight: 700;
-    transform: scale(1.05);
-}
 /* --- Scroll Hint --- */
 .scroll-hint {
     position: absolute; bottom: 30px; left: 50%;
@@ -932,17 +925,4 @@ td.ellipsis-cell {
     .collision-vs { padding: 4px 0; }
     /* Counter row: center on mobile */
     .counter-row { justify-content: center; gap: 12px; flex-wrap: wrap; }
-    /* Force all buttons to center on mobile */
-    .btn-primary, .btn-secondary, .btn-ghost {
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .step-controls,
-    .count-buttons,
-    .input-row,
-    .counter-row,
-    .pair-test-zone .input-row {
-        justify-content: center;
-        align-items: center;
-    }
 }
