@@ -108,10 +108,16 @@
             }
             // Add ellipsis row at the bottom to indicate infinity
             if (rowsShown >= INFINITE_TABLE_ROWS && !container.querySelector('.ellipsis-row')) {
+                // Row N (ellipsis content)
                 const er = el('div', 'table-row ellipsis-row');
                 er.appendChild(el('span', 'row-num', '第 N 行'));
                 er.appendChild(el('span', 'row-val ellipsis-val', '0. …'));
                 container.appendChild(er);
+                // Final ellipsis row (infinite continuation)
+                const fr = el('div', 'table-row ellipsis-row final-ellipsis');
+                fr.appendChild(el('span', 'row-num', '…'));
+                fr.appendChild(el('span', 'row-val ellipsis-val', '…'));
+                container.appendChild(fr);
             }
         }
 
@@ -176,7 +182,7 @@
             table.appendChild(tr);
         }
 
-        // Ellipsis row at the bottom (infinite rows)
+        // Ellipsis row: 第 N 行 (ellipsis content)
         const ellipsisRow = document.createElement('tr');
         const elLabel = document.createElement('td');
         elLabel.className = 'row-label';
@@ -196,6 +202,27 @@
         elTail.textContent = '…';
         ellipsisRow.appendChild(elTail);
         table.appendChild(ellipsisRow);
+
+        // Final ellipsis row (infinite continuation, pure dots)
+        const finalRow = document.createElement('tr');
+        const fLabel = document.createElement('td');
+        fLabel.className = 'row-label';
+        fLabel.textContent = '…';
+        finalRow.appendChild(fLabel);
+        const fPrefix = document.createElement('td');
+        fPrefix.className = 'decimal-prefix';
+        finalRow.appendChild(fPrefix);
+        for (let j = 0; j < DECIMAL_PLACES; j++) {
+            const td = document.createElement('td');
+            td.className = 'ellipsis-cell';
+            td.textContent = '…';
+            finalRow.appendChild(td);
+        }
+        const fTail = document.createElement('td');
+        fTail.className = 'ellipsis-cell';
+        fTail.textContent = '…';
+        finalRow.appendChild(fTail);
+        table.appendChild(finalRow);
         }
     }
 
