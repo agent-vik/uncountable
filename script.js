@@ -97,7 +97,32 @@
         naturalContainer.appendChild(el('span', 'pair-num', '…'));
         squareContainer.appendChild(el('span', 'pair-num', '…'));
 
+        // Ratio demo slider
+        const slider = $('rangeSlider');
+        const rangeVal = $('rangeVal');
+        const fill = $('ratioFill');
+        const skip = $('ratioSkip');
+        function updateRatio() {
+            const n = parseInt(slider.value, 10);
+            const squares = Math.floor(Math.sqrt(n));
+            const pct = (squares / n) * 100;
+            fill.style.width = pct + '%';
+            skip.style.width = (100 - pct) + '%';
+            rangeVal.textContent = n.toLocaleString('zh-CN');
+        }
+        slider.addEventListener('input', updateRatio);
+        updateRatio();
+
+        // Angle navigation
+        $('toAngle2').onclick = () => {
+            $('angle-1').classList.add('hidden');
+            $('angle-2').classList.remove('hidden');
+        };
         $('startPair').onclick = startPairing;
+        $('toCollision').onclick = () => {
+            $('angle-2').classList.add('hidden');
+            $('collision').classList.remove('hidden');
+        };
     }
 
     function startPairing() {
@@ -125,12 +150,7 @@
                 paired.scrollTop = paired.scrollHeight;
 
                 if (pairedCount === PAIR_COUNT) {
-                    // Show paradox climax
-                    setTimeout(() => {
-                        $('paradoxClimax').classList.remove('hidden');
-                        $('paradoxClimax').classList.add('visible');
-                        setTimeout(() => $('proceed2').classList.remove('hidden'), 2000);
-                    }, 600);
+                    setTimeout(() => $('toCollision').classList.remove('hidden'), 800);
                 }
             }, (i - 1) * 300);
         }

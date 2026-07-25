@@ -64,12 +64,12 @@
             <h2 class="gallery-title">The Paradox</h2>
             <p class="gallery-subtitle">悖论</p>
 
+            <!-- 2-1: Introduce the two sequences -->
             <div class="narration-block">
-                <p>这个人叫<strong>伽利略</strong>。</p>
-                <p>他比较了两串数字：</p>
+                <p>1638 年，<strong>伽利略</strong>比较了两串数字。</p>
+                <p>第一串，是自然数——从 1 开始，每个数加 1：</p>
             </div>
 
-            <!-- Dual sequences -->
             <div class="pair-zone">
                 <div class="pair-col">
                     <p class="pair-label">自然数</p>
@@ -82,25 +82,107 @@
             </div>
 
             <div class="narration-block">
-                <p>直觉上，平方数明显比自然数"少"。2, 3, 5, 6, 7, 8 都不是平方数。越往后越稀疏。</p>
+                <p>第二串，是完全平方数——某个自然数的平方：</p>
+                <p class="mono-line">1²=1, 2²=4, 3²=9, 4²=16, 5²=25, …</p>
             </div>
 
-            <button id="startPair" class="btn-primary">把它们配对 →</button>
+            <div class="scroll-hint-static">向下滚动 ↓</div>
 
-            <div class="pair-result hidden" id="pairResult">
-                <div class="pair-paired" id="pairPaired"></div>
-                <p class="narration-text">每一个自然数都配上了平方数，每一个平方数都找回了自己的自然数。<strong>一个不多，一个不少。</strong></p>
+            <!-- 2-2: Angle 1 — squares are a subset -->
+            <div class="sub-screen" id="angle-1">
+                <div class="angle-badge">角度一</div>
+                <h3 class="angle-title">平方数是自然数的一部分</h3>
+
+                <div class="narration-block">
+                    <p>看自然数序列：1, <span class="strike">2</span>, <span class="strike">3</span>, 4, <span class="strike">5</span>, <span class="strike">6</span>, <span class="strike">7</span>, <span class="strike">8</span>, 9, …</p>
+                    <p>2, 3, 5, 6, 7, 8 都不是平方数。它们被跳过了。</p>
+                    <p>前 10 个自然数里，只有 1, 4, 9 是平方数——7 个被跳过。</p>
+                    <p>前 100 个里，只有 10 个平方数——90 个被跳过。</p>
+                    <p>前 10000 个里，只有 100 个平方数——9900 个被跳过。</p>
+                </div>
+
+                <div class="ratio-demo" id="ratioDemo">
+                    <div class="ratio-bar">
+                        <div class="ratio-fill" id="ratioFill"></div>
+                        <div class="ratio-skip" id="ratioSkip"></div>
+                    </div>
+                    <div class="ratio-labels">
+                        <span class="ratio-in">平方数</span>
+                        <span class="ratio-out">被跳过</span>
+                    </div>
+                    <div class="ratio-controls">
+                        <label>范围：前 <span id="rangeVal">10</span> 个自然数</label>
+                        <input type="range" id="rangeSlider" min="10" max="10000" step="10" value="10">
+                    </div>
+                </div>
+
+                <div class="narration-block">
+                    <p class="key-line">结论一：平方数比自然数少。越往后越稀疏，几乎全是被跳过的。</p>
+                </div>
+
+                <button id="toAngle2" class="btn-secondary">换一个角度看 →</button>
             </div>
 
-            <div class="narration-block fade-in hidden" id="paradoxClimax">
-                <p class="key-line highlight">但平方数明明是自然数的一部分。</p>
-                <p class="key-line highlight">部分怎么能等于整体？</p>
+            <!-- 2-3: Angle 2 — pairing -->
+            <div class="sub-screen hidden" id="angle-2">
+                <div class="angle-badge">角度二</div>
+                <h3 class="angle-title">但它们能一一配对</h3>
+
+                <div class="narration-block">
+                    <p>如果把每个自然数和它的平方配对——</p>
+                    <p>每个自然数都能配上一个平方数：n → n²</p>
+                    <p>每个平方数也都能找回它的自然数：n² → n</p>
+                </div>
+
+                <button id="startPair" class="btn-primary">开始配对 →</button>
+
+                <div class="pair-result hidden" id="pairResult">
+                    <div class="pair-paired" id="pairPaired"></div>
+                    <p class="narration-text">每一个自然数都配上了平方数，每一个平方数都找回了自己的自然数。<br><strong>一个不多，一个不少。</strong></p>
+                </div>
+
+                <div class="narration-block">
+                    <p class="key-line">结论二：平方数和自然数一样多。它们的数量完全相等。</p>
+                </div>
+
+                <button id="toCollision" class="btn-secondary hidden">两个角度放在一起看 →</button>
+            </div>
+
+            <!-- 2-4: The collision -->
+            <div class="sub-screen hidden" id="collision">
+                <div class="angle-badge collision">碰撞</div>
+                <h3 class="angle-title">悖论</h3>
+
+                <div class="collision-zone">
+                    <div class="collision-card left">
+                        <p class="collision-label">角度一</p>
+                        <p class="collision-statement">平方数比自然数少</p>
+                        <p class="collision-reason">它们是子集，大量数字被跳过</p>
+                    </div>
+                    <div class="collision-vs">vs</div>
+                    <div class="collision-card right">
+                        <p class="collision-label">角度二</p>
+                        <p class="collision-statement">平方数和自然数一样多</p>
+                        <p class="collision-reason">它们能一一配对，一个不多一个不少</p>
+                    </div>
+                </div>
+
                 <div class="conclusion-gap"></div>
-                <p>伽利略的反应是：<em>"无限不可比较。"</em></p>
-                <p>他选择了转身走开。</p>
-            </div>
 
-            <button id="proceed2" class="btn-secondary hidden">250 年后，有人走了进来 →</button>
+                <div class="narration-block">
+                    <p class="key-line highlight">两个结论都对。但它们矛盾。</p>
+                    <p class="key-line highlight">部分怎么能等于整体？</p>
+                </div>
+
+                <div class="conclusion-gap"></div>
+
+                <div class="narration-block">
+                    <p>伽利略的反应是：<em>"无限不可比较。"</em></p>
+                    <p>他选择了转身走开。</p>
+                </div>
+
+                <button id="proceed2" class="btn-secondary">250 年后，有人走了进来 →</button>
+            </div>
         </div>
     </section>
 
