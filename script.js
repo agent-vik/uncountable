@@ -100,14 +100,18 @@
             for (let i = 0; i < count && rowsShown < INFINITE_TABLE_ROWS; i++) {
                 const row = el('div', 'table-row');
                 const num = el('span', 'row-num', `第 ${rowsShown + 1} 行`);
-                const val = el('span', 'row-val', randDecimal() + ' …');
+                const val = el('span', 'row-val', randDecimal() + '…');
                 row.appendChild(num);
                 row.appendChild(val);
                 container.appendChild(row);
                 rowsShown++;
             }
-            if (rowsShown >= INFINITE_TABLE_ROWS) {
-                // Loop: remove first 10 and add 10 more (simulating endless)
+            // Add ellipsis row at the bottom to indicate infinity
+            if (rowsShown >= INFINITE_TABLE_ROWS && !container.querySelector('.ellipsis-row')) {
+                const er = el('div', 'table-row ellipsis-row');
+                er.appendChild(el('span', 'row-num', '第 N 行'));
+                er.appendChild(el('span', 'row-val ellipsis-val', '0. …'));
+                container.appendChild(er);
             }
         }
 
@@ -163,7 +167,35 @@
                 tr.appendChild(td);
             }
 
+            // Trailing ellipsis column (infinite decimal places)
+            const ellipsisCol = document.createElement('td');
+            ellipsisCol.className = 'ellipsis-cell';
+            ellipsisCol.textContent = '…';
+            tr.appendChild(ellipsisCol);
+
             table.appendChild(tr);
+        }
+
+        // Ellipsis row at the bottom (infinite rows)
+        const ellipsisRow = document.createElement('tr');
+        const elLabel = document.createElement('td');
+        elLabel.className = 'row-label';
+        elLabel.textContent = '第 N 行';
+        ellipsisRow.appendChild(elLabel);
+        const elPrefix = document.createElement('td');
+        elPrefix.className = 'decimal-prefix';
+        ellipsisRow.appendChild(elPrefix);
+        for (let j = 0; j < DECIMAL_PLACES; j++) {
+            const td = document.createElement('td');
+            td.className = 'ellipsis-cell';
+            td.textContent = '…';
+            ellipsisRow.appendChild(td);
+        }
+        const elTail = document.createElement('td');
+        elTail.className = 'ellipsis-cell';
+        elTail.textContent = '…';
+        ellipsisRow.appendChild(elTail);
+        table.appendChild(ellipsisRow);
         }
     }
 
