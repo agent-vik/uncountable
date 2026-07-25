@@ -15,7 +15,6 @@
     let flippedDigits = [];
     let currentDiagStep = 0;
     let currentCheckRow = 0;
-    let pairedCount = 0;
 
     // --- Helpers ---
     function randDigit() { return Math.floor(Math.random() * 10); }
@@ -76,6 +75,17 @@
     }
 
     // --- Gallery 2: Galileo's Paradox ---
+    const GRID_SIZE = 50;
+    let gridSelected = new Set();
+    let gridChecked = false;
+    let pairAttempts = [];
+
+    function isPerfectSquare(n) {
+        if (n < 1) return false;
+        const s = Math.round(Math.sqrt(n));
+        return s * s === n;
+    }
+
     function initGallery2() {
         // Render two sequences
         const naturalContainer = $('naturalNums');
@@ -93,15 +103,18 @@
             squareContainer.appendChild(sEl);
         }
 
-        // Add ellipsis
         naturalContainer.appendChild(el('span', 'pair-num', '…'));
         squareContainer.appendChild(el('span', 'pair-num', '…'));
 
-        // Ratio demo slider
+        // Angle 1: Number grid
+        initNumberGrid();
+
+        // Ratio slider
         const slider = $('rangeSlider');
         const rangeVal = $('rangeVal');
         const fill = $('ratioFill');
         const skip = $('ratioSkip');
+        const summary = $('ratioSummary');
         function updateRatio() {
             const n = parseInt(slider.value, 10);
             const squares = Math.floor(Math.sqrt(n));
@@ -109,6 +122,7 @@
             fill.style.width = pct + '%';
             skip.style.width = (100 - pct) + '%';
             rangeVal.textContent = n.toLocaleString('zh-CN');
+            summary.innerHTML = `前 ${n.toLocaleString('zh-CN')} 个自然数中，只有 <strong style="color:var(--gold-bright)">${squares.toLocaleString('zh-CN')}</strong> 个平方数，跳过了 <strong style="color:var(--text-dim)">${(n - squares).toLocaleString('zh-CN')}</strong> 个。`;
         }
         slider.addEventListener('input', updateRatio);
         updateRatio();
@@ -118,41 +132,120 @@
             $('angle-1').classList.add('hidden');
             $('angle-2').classList.remove('hidden');
         };
-        $('startPair').onclick = startPairing;
+        $('checkGrid').onclick = checkGrid;
+
+        // Angle 2: Pair test
+        $('pairTest').onclick = tryPair;
+        $('pairInput').addEventListener('keydown', e => { if (e.key === 'Enter') tryPair(); });
         $('toCollision').onclick = () => {
             $('angle-2').classList.add('hidden');
             $('collision').classList.remove('hidden');
         };
     }
 
-    function startPairing() {
-        $('startPair').classList.add('hidden');
-        $('pairResult').classList.remove('hidden');
-        const paired = $('pairPaired');
-        paired.innerHTML = '';
-        pairedCount = 0;
+    function initNumberGrid() {
+        const grid = $('numberGrid');
+        grid.innerHTML = '';
+        gridSelected.clear();
+        gridChecked = false;
 
-        // Animate pairing
-        for (let i = 1; i <= PAIR_COUNT; i++) {
-            setTimeout(() => {
-                // Highlight the pair
-                $(`nat-${i}`).classList.add('paired');
-                $(`sq-${i}`).classList.add('paired');
-
-                // Add to paired list
-                const row = el('div', 'pair-row');
-                row.appendChild(el('span', 'natural-val', `${i}`));
-                row.appendChild(el('span', 'arrow', ' → '));
-                row.appendChild(el('span', 'square-val', `${i * i}`));
-                paired.appendChild(row);
-
-                pairedCount++;
-                paired.scrollTop = paired.scrollHeight;
-
-                if (pairedCount === PAIR_COUNT) {
-                    setTimeout(() => $('toCollision').classList.remove('hidden'), 800);
+        for (let i = 1; i <= GRID_SIZE; i++) {
+            const cell = el('div', 'grid-cell', i);
+            cell.dataset.num = i;
+            cell.onclick = () => {
+                if (gridChecked) return;
+                if (cell.classList.contains('selected')) {
+                    cell.classList.remove('selected');
+                    gridSelected.delete(i);
+                } else {
+                    cell.classList.add('selected');
+                    gridSelected.add(i);
                 }
-            }, (i - 1) * 300);
+                updateGridStats();
+            };
+            grid.appendChild(cell);
+        }
+        updateGridStats();
+    }
+
+    function updateGridStats() {
+        $('statFound').textContent = gridSelected.size;
+        $('statMissed').textContent = GRID_SIZE - gridSelected.size;
+        $('statWrong').textContent = '—';
+        if (gridSelected.size > 0 && !$('checkGrid').classList.contains('hidden') === false) {
+            $('checkGrid').classList.remove('hidden');
+        }
+        if (gridSelected.size > 0) {
+            $('checkGrid').classList.remove('hidden');
+        }
+    }
+
+    function checkGrid() {
+        gridChecked = true;
+        let correct = 0, wrong = 0, missed = 0;
+
+        document.querySelectorAll('.grid-cell').forEach(cell => {
+            const num = parseInt(cell.dataset.num, 10);
+            const selected = cell.classList.contains('selected');
+            const isSquare = isPerfectSquare(num);
+
+            cell.classList.remove('selected');
+
+            if (selected && isSquare) {
+                cell.classList.add('correct');
+                correct++;
+            } else if (selected && !isSquare) {
+                cell.classList.add('wrong');
+                wrong++;
+            } else if (!selected && isSquare) {
+                cell.classList.add('missed');
+                missed++;
+            }
+        });
+
+        $('statFound').textContent = correct;
+        $('statMissed').textContent = missed;
+        $('statWrong').textContent = wrong;
+
+        $('checkGrid').classList.add('hidden');
+        $('angle1Result').classList.remove('hidden');
+        $('ratioDemo').classList.remove('hidden');
+        $('angle1Conclusion').classList.remove('hidden');
+        $('toAngle2').classList.remove('hidden');
+    }
+
+    function tryPair() {
+        const input = $('pairInput');
+        const result = $('pairTestResult');
+        let val = input.value.trim();
+        if (!val) return;
+        const n = parseInt(val, 10);
+        if (isNaN(n) || n < 1 || !Number.isInteger(n)) {
+            result.innerHTML = '<p style="color:var(--error)">请输入一个正整数。</p>';
+            return;
+        }
+
+        const sq = n * n;
+        pairAttempts.push({ n, sq: n * n });
+
+        result.innerHTML = `<div class="pair-card"><span class="natural">${n.toLocaleString('zh-CN')}</span><span class="arrow">→</span><span class="square">${sq.toLocaleString('zh-CN')}</span></div>`;
+
+        const hist = $('pairHistory');
+        hist.innerHTML = '';
+        pairAttempts.slice(-12).forEach(a => {
+            const item = el('span', 'pair-history-item', `${a.n}→${a.sq}`);
+            hist.appendChild(item);
+        });
+
+        input.value = '';
+        input.focus();
+
+        // Show result after 3 attempts
+        if (pairAttempts.length >= 3) {
+            $('attemptCount').textContent = pairAttempts.length;
+            $('angle2Result').classList.remove('hidden');
+            $('angle2Conclusion').classList.remove('hidden');
+            $('toCollision').classList.remove('hidden');
         }
     }
 

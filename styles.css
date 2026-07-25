@@ -174,6 +174,132 @@ body {
     padding: 10px 16px;
 }
 
+/* --- Number Grid (Angle 1) --- */
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 4px;
+    max-width: 560px;
+    margin: 24px auto;
+}
+.grid-cell {
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--text-faint);
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+}
+.grid-cell:hover {
+    border-color: var(--gold-dim);
+    background: rgba(212, 165, 116, 0.05);
+}
+.grid-cell.selected {
+    background: rgba(212, 165, 116, 0.2);
+    border-color: var(--gold);
+    color: var(--gold-bright);
+    font-weight: 700;
+    transform: scale(1.05);
+}
+.grid-cell.correct {
+    background: rgba(122, 212, 165, 0.15);
+    border-color: var(--green);
+    color: var(--green);
+    font-weight: 700;
+}
+.grid-cell.wrong {
+    background: rgba(212, 116, 138, 0.15);
+    border-color: var(--error);
+    color: var(--error);
+    text-decoration: line-through;
+}
+.grid-cell.missed {
+    background: rgba(212, 165, 116, 0.1);
+    border-color: var(--gold-dim);
+    color: var(--gold);
+    font-weight: 700;
+    animation: missedPulse 0.5s ease;
+}
+@keyframes missedPulse {
+    0% { transform: scale(0.8); opacity: 0; }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.grid-stats {
+    display: flex; gap: 24px; justify-content: center;
+    margin: 16px 0;
+}
+.grid-stat { text-align: center; }
+.stat-val {
+    display: block;
+    font-family: var(--mono);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold-bright);
+}
+.grid-stat:nth-child(2) .stat-val { color: var(--text-dim); }
+.grid-stat:nth-child(3) .stat-val { color: var(--error); }
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 4px;
+}
+
+.ratio-summary {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-top: 8px;
+}
+
+/* --- Pair Test Zone (Angle 2) --- */
+.pair-test-zone {
+    margin: 24px 0;
+    text-align: center;
+}
+.pair-test-result {
+    margin: 16px 0;
+    min-height: 40px;
+}
+.pair-test-result .pair-card {
+    display: inline-flex; align-items: center; gap: 16px;
+    padding: 12px 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--gold-dim);
+    border-radius: 8px;
+    font-family: var(--mono);
+    font-size: 1.2rem;
+    animation: cardPop 0.4s ease;
+}
+@keyframes cardPop {
+    from { opacity: 0; transform: scale(0.7); }
+    to { opacity: 1; transform: scale(1); }
+}
+.pair-card .natural { color: var(--text); }
+.pair-card .arrow { color: var(--gold-dim); }
+.pair-card .square { color: var(--gold-bright); font-weight: 700; }
+.pair-history {
+    display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+    margin-top: 12px;
+    max-height: 100px;
+    overflow-y: auto;
+}
+.pair-history-item {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    padding: 2px 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--text-faint);
+    border-radius: 12px;
+}
+
 /* --- Sub-screen (within a gallery) --- */
 .sub-screen {
     padding: 40px 0;

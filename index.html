@@ -88,20 +88,41 @@
 
             <div class="scroll-hint-static">向下滚动 ↓</div>
 
-            <!-- 2-2: Angle 1 — squares are a subset -->
+            <!-- 2-2: Angle 1 — circle the squares -->
             <div class="sub-screen" id="angle-1">
                 <div class="angle-badge">角度一</div>
-                <h3 class="angle-title">平方数是自然数的一部分</h3>
+                <h3 class="angle-title">亲手数一数：平方数有多少？</h3>
 
                 <div class="narration-block">
-                    <p>看自然数序列：1, <span class="strike">2</span>, <span class="strike">3</span>, 4, <span class="strike">5</span>, <span class="strike">6</span>, <span class="strike">7</span>, <span class="strike">8</span>, 9, …</p>
-                    <p>2, 3, 5, 6, 7, 8 都不是平方数。它们被跳过了。</p>
-                    <p>前 10 个自然数里，只有 1, 4, 9 是平方数——7 个被跳过。</p>
-                    <p>前 100 个里，只有 10 个平方数——90 个被跳过。</p>
-                    <p>前 10000 个里，只有 100 个平方数——9900 个被跳过。</p>
+                    <p>下面是前 50 个自然数。<br>你觉得哪些是完全平方数？点出来试试。</p>
                 </div>
 
-                <div class="ratio-demo" id="ratioDemo">
+                <div class="number-grid" id="numberGrid"></div>
+
+                <div class="grid-stats" id="gridStats">
+                    <div class="grid-stat">
+                        <span class="stat-val" id="statFound">0</span>
+                        <span class="stat-label">你圈出的平方数</span>
+                    </div>
+                    <div class="grid-stat">
+                        <span class="stat-val" id="statMissed">0</span>
+                        <span class="stat-label">你跳过的</span>
+                    </div>
+                    <div class="grid-stat">
+                        <span class="stat-val" id="statWrong">0</span>
+                        <span class="stat-label">圈错的</span>
+                    </div>
+                </div>
+
+                <button id="checkGrid" class="btn-primary hidden">看结果 →</button>
+
+                <div class="narration-block hidden" id="angle1Result">
+                    <p>在前 50 个自然数里，只有 <strong>7 个</strong> 平方数（1, 4, 9, 16, 25, 36, 49）。</p>
+                    <p>其余 43 个都被跳过了。</p>
+                    <p>换一个范围呢？</p>
+                </div>
+
+                <div class="ratio-demo hidden" id="ratioDemo">
                     <div class="ratio-bar">
                         <div class="ratio-fill" id="ratioFill"></div>
                         <div class="ratio-skip" id="ratioSkip"></div>
@@ -111,38 +132,46 @@
                         <span class="ratio-out">被跳过</span>
                     </div>
                     <div class="ratio-controls">
-                        <label>范围：前 <span id="rangeVal">10</span> 个自然数</label>
-                        <input type="range" id="rangeSlider" min="10" max="10000" step="10" value="10">
+                        <label>范围：前 <span id="rangeVal">50</span> 个自然数</label>
+                        <input type="range" id="rangeSlider" min="10" max="10000" step="10" value="50">
                     </div>
+                    <p class="ratio-summary" id="ratioSummary"></p>
                 </div>
 
-                <div class="narration-block">
+                <div class="narration-block hidden" id="angle1Conclusion">
                     <p class="key-line">结论一：平方数比自然数少。越往后越稀疏，几乎全是被跳过的。</p>
                 </div>
 
-                <button id="toAngle2" class="btn-secondary">换一个角度看 →</button>
+                <button id="toAngle2" class="btn-secondary hidden">换一个角度看 →</button>
             </div>
 
-            <!-- 2-3: Angle 2 — pairing -->
+            <!-- 2-3: Angle 2 — try to find an unpairable number -->
             <div class="sub-screen hidden" id="angle-2">
                 <div class="angle-badge">角度二</div>
-                <h3 class="angle-title">但它们能一一配对</h3>
+                <h3 class="angle-title">换一个角度：每个数都能配上吗？</h3>
 
                 <div class="narration-block">
-                    <p>如果把每个自然数和它的平方配对——</p>
-                    <p>每个自然数都能配上一个平方数：n → n²</p>
-                    <p>每个平方数也都能找回它的自然数：n² → n</p>
+                    <p>如果每个自然数都能配上一个平方数，那它们就一样多。</p>
+                    <p>规则很简单：输入任何自然数 n，它的平方就是 n²。</p>
+                    <p>试试看——能不能找到一个配不上的数？</p>
                 </div>
 
-                <button id="startPair" class="btn-primary">开始配对 →</button>
-
-                <div class="pair-result hidden" id="pairResult">
-                    <div class="pair-paired" id="pairPaired"></div>
-                    <p class="narration-text">每一个自然数都配上了平方数，每一个平方数都找回了自己的自然数。<br><strong>一个不多，一个不少。</strong></p>
+                <div class="pair-test-zone">
+                    <div class="input-row">
+                        <input type="text" id="pairInput" placeholder="输入一个自然数…" autocomplete="off" inputmode="numeric">
+                        <button id="pairTest" class="btn-primary">配对</button>
+                    </div>
+                    <div class="pair-test-result" id="pairTestResult"></div>
+                    <div class="pair-history" id="pairHistory"></div>
                 </div>
 
-                <div class="narration-block">
-                    <p class="key-line">结论二：平方数和自然数一样多。它们的数量完全相等。</p>
+                <div class="narration-block hidden" id="angle2Result">
+                    <p>你试了 <strong id="attemptCount">0</strong> 个数，每一个都配上了。</p>
+                    <p>事实上，<em>任何</em>自然数 n 都有对应的 n²。这条规则没有例外。</p>
+                </div>
+
+                <div class="narration-block hidden" id="angle2Conclusion">
+                    <p class="key-line">结论二：平方数和自然数一样多。每一个都能配上，一个不少。</p>
                 </div>
 
                 <button id="toCollision" class="btn-secondary hidden">两个角度放在一起看 →</button>
