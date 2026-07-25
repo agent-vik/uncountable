@@ -932,4 +932,17 @@ td.ellipsis-cell {
     .collision-vs { padding: 4px 0; }
     /* Counter row: center on mobile */
     .counter-row { justify-content: center; gap: 12px; flex-wrap: wrap; }
+    /* Force all buttons to center on mobile */
+    .btn-primary, .btn-secondary, .btn-ghost {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .step-controls,
+    .count-buttons,
+    .input-row,
+    .counter-row,
+    .pair-test-zone .input-row {
+        justify-content: center;
+        align-items: center;
+    }
 }
