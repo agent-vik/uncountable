@@ -6,7 +6,7 @@
     const TABLE_ROWS = 8;
     const DECIMAL_PLACES = 8;
     const INFINITE_TABLE_ROWS = 50;
-    const PAIR_COUNT = 10; // Galileo pairing demo
+    const SEQUENCE_DISPLAY_COUNT = 10;
 
     // --- State ---
     let userNumbers = [];
@@ -24,7 +24,11 @@
         return s;
     }
     function flipDigit(d) { return (d + 1) % 10; }
-    function $(id) { return document.getElementById(id); }
+    function $(id) {
+        const el = document.getElementById(id);
+        if (!el) console.warn('[Uncountable] Element not found:', id);
+        return el;
+    }
     function el(tag, cls, html) {
         const e = document.createElement(tag);
         if (cls) e.className = cls;
@@ -42,8 +46,8 @@
     }
 
     // --- Gallery 1: Intuition (counting interaction + fade-in) ---
+    let count = 0;
     function initGallery1() {
-        let count = 0;
         const display = $('countDisplay');
         const hint = $('countHint');
 
@@ -93,7 +97,7 @@
         naturalContainer.innerHTML = '';
         squareContainer.innerHTML = '';
 
-        for (let i = 1; i <= PAIR_COUNT; i++) {
+        for (let i = 1; i <= SEQUENCE_DISPLAY_COUNT; i++) {
             const nEl = el('span', 'pair-num', i);
             nEl.id = `nat-${i}`;
             naturalContainer.appendChild(nEl);
@@ -653,6 +657,64 @@
         initGallery5();
         initGallery6();
         initNavProgress();
+
+        // Reset logic for "从头看一遍"
+        const resetLink = document.querySelector('.exhibit-end a[href="#gallery-1"]');
+        if (resetLink) {
+            resetLink.addEventListener('click', (e) => {
+                // Reset Gallery 1 counter
+                count = 0;
+                if ($('countDisplay')) $('countDisplay').textContent = '0';
+                if ($('countHint')) $('countHint').classList.add('hidden');
+
+                // Reset Gallery 2
+                gridSelected.clear();
+                gridChecked = false;
+                pairAttempts = [];
+                initNumberGrid();
+                ['angle1Result', 'ratioDemo', 'angle1Conclusion', 'angle2Result', 'angle2Conclusion'].forEach(id => {
+                    const el = $(id);
+                    if (el) el.classList.add('hidden');
+                });
+                if ($('angle-1')) $('angle-1').classList.remove('hidden');
+                if ($('angle-2')) $('angle-2').classList.add('hidden');
+                if ($('collision')) $('collision').classList.add('hidden');
+                if ($('toAngle2')) $('toAngle2').classList.add('hidden');
+                if ($('toCollision')) $('toCollision').classList.add('hidden');
+                if ($('pairTestResult')) $('pairTestResult').innerHTML = '';
+                if ($('pairHistory')) $('pairHistory').innerHTML = '';
+                if ($('pairInput')) $('pairInput').value = '';
+
+                // Reset Gallery 3
+                userNumbers = [];
+                if ($('input-zone') || $('numberInput')) {
+                    const iz = $('numberInput') ? $('numberInput').closest('.input-zone') : null;
+                    if (iz) iz.classList.remove('hidden');
+                }
+                if ($('tableContainer')) $('tableContainer').classList.add('hidden');
+                if ($('proceed3')) $('proceed3').classList.add('hidden');
+                if ($('proceed3b')) $('proceed3b').classList.add('hidden');
+                if ($('numberList')) $('numberList').innerHTML = '<p class="empty-hint">你的列表是空的。开始写吧。</p>';
+                if ($('counter')) $('counter').textContent = '你已收集了 0 个数字';
+
+                // Reset Gallery 4
+                currentDiagStep = 0;
+                flippedDigits = [];
+                currentCheckRow = 0;
+                initTableData();
+                buildDiagonalTable();
+                ['step-4b', 'step-4c', 'step-4d'].forEach(id => { if ($(id)) $(id).classList.add('hidden'); });
+                if ($('step-4a')) $('step-4a').classList.remove('hidden');
+                if ($('diagHint')) $('diagHint').textContent = '点击按钮，看康托如何找到对角线。';
+                if ($('newNumber')) $('newNumber').textContent = '0.';
+                if ($('checkConclusion')) $('checkConclusion').classList.add('hidden');
+                if ($('proceed4c')) $('proceed4c').classList.add('hidden');
+                if ($('proceed4d')) $('proceed4d').classList.add('hidden');
+
+                // Reset Gallery 5 & 6 reveal
+                document.querySelectorAll('#gallery-5 .reveal, #gallery-6 .reveal').forEach(el => el.classList.remove('visible'));
+            });
+        }
     });
 
 })();
