@@ -65,7 +65,7 @@ body {
     position: relative;
     border-bottom: 1px solid rgba(212, 165, 116, 0.04);
 }
-.gallery-inner { max-width: var(--max-width); width: 100%; }
+.gallery-inner { max-width: var(--max-width); width: 100%; text-align: center; }
 
 .gallery-number {
     font-family: var(--mono);
