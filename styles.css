@@ -892,6 +892,7 @@ td.ellipsis-cell {
 .epitaph-quote { font-style: italic; color: var(--text); }
 
 .exhibit-end { text-align: center; margin-top: 48px; }
+.exhibit-end a { text-decoration: none; }
 
 /* --- Site Footer --- */
 .site-footer {
