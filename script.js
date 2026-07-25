@@ -218,6 +218,15 @@
         $('toAngle2').classList.remove('hidden');
     }
 
+    function formatNumber(n) {
+        const str = n.toString();
+        if (str.length <= 12) return n.toLocaleString('zh-CN');
+        // For very large numbers, show with scientific notation
+        const exp = Math.floor(Math.log10(Math.abs(n)));
+        const mantissa = n / Math.pow(10, exp);
+        return `${mantissa.toFixed(4)} × 10^${exp}`;
+    }
+
     function tryPair() {
         const input = $('pairInput');
         const result = $('pairTestResult');
@@ -228,22 +237,16 @@
             result.innerHTML = '<p style="color:var(--error)">请输入一个正整数。</p>';
             return;
         }
-        if (n > 1e6) {
-            result.innerHTML = '<p style="color:var(--gold-dim)">这个数太大了，但别担心——不管多大的数，它的平方都存在。试试小一点的？</p>';
-            input.value = '';
-            input.focus();
-            return;
-        }
 
         const sq = n * n;
         pairAttempts.push({ n, sq });
 
-        result.innerHTML = `<div class="pair-card"><span class="natural">${n.toLocaleString('zh-CN')}</span><span class="arrow">→</span><span class="square">${sq.toLocaleString('zh-CN')}</span></div>`;
+        result.innerHTML = `<div class="pair-card"><span class="natural">${formatNumber(n)}</span><span class="arrow">→</span><span class="square">${formatNumber(sq)}</span></div>`;
 
         const hist = $('pairHistory');
         hist.innerHTML = '';
         pairAttempts.slice(-12).forEach(a => {
-            const item = el('span', 'pair-history-item', `${a.n}→${a.sq}`);
+            const item = el('span', 'pair-history-item', `${formatNumber(a.n)}→${formatNumber(a.sq)}`);
             hist.appendChild(item);
         });
 
