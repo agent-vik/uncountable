@@ -293,6 +293,35 @@ blockquote.quote {
     font-style: italic;
 }
 
+/* --- Ellipsis for Infinity --- */
+.ellipsis-top, .ellipsis-bottom {
+    text-align: center;
+    color: var(--gold-dim);
+    font-size: 1.2rem;
+    font-family: var(--mono);
+    padding: 4px 0;
+    letter-spacing: 0.3em;
+}
+.table-with-ellipsis {
+    display: flex; align-items: stretch; justify-content: center; gap: 4px;
+}
+.ellipsis-left, .ellipsis-right {
+    color: var(--gold-dim);
+    font-size: 1.2rem;
+    font-family: var(--mono);
+    display: flex; align-items: center;
+    padding: 0 2px;
+}
+.ellipsis-hint-row {
+    display: flex; justify-content: center; align-items: center; gap: 16px;
+    margin-top: 8px;
+}
+.ellipsis-hint {
+    color: var(--gold-dim);
+    font-family: var(--mono);
+    font-size: 1rem;
+}
+
 /* --- Diagonal Table --- */
 .diagonal-table-container {
     overflow-x: auto;
