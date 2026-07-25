@@ -131,6 +131,7 @@
         $('toAngle2').onclick = () => {
             $('angle-1').classList.add('hidden');
             $('angle-2').classList.remove('hidden');
+            $('angle-2').scrollIntoView({ behavior: 'smooth', block: 'start' });
         };
         $('checkGrid').onclick = checkGrid;
 
@@ -140,6 +141,7 @@
         $('toCollision').onclick = () => {
             $('angle-2').classList.add('hidden');
             $('collision').classList.remove('hidden');
+            $('collision').scrollIntoView({ behavior: 'smooth', block: 'start' });
         };
     }
 
