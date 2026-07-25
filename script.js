@@ -3,6 +3,100 @@
     'use strict';
 
     // Config
+    let currentLang = 'zh';
+
+    // i18n
+    function t(key, params) {
+        const dict = I18N[currentLang] || I18N['zh'];
+        let str = dict[key] || key;
+        if (params) {
+            Object.keys(params).forEach(k => {
+                str = str.replace('{' + k + '}', params[k]);
+            });
+        }
+        return str;
+    }
+
+    function applyLang(lang) {
+        currentLang = lang;
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            el.innerHTML = t(key);
+        });
+        document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+            const key = el.getAttribute('data-i18n-ph');
+            el.placeholder = t(key);
+        });
+        // Update lang toggle button
+        const toggle = $('langToggle');
+        if (toggle) {
+            toggle.textContent = lang === 'zh' ? 'EN' : '中文';
+            toggle.dataset.lang = lang;
+        }
+        // Update nav progress
+        updateNavProgress();
+        // Re-render dynamic text
+        updateDynamicText();
+        // Update URL
+        const url = new URL(window.location);
+        if (lang === 'zh') url.searchParams.delete('lang');
+        else url.searchParams.set('lang', lang);
+        window.history.replaceState({}, '', url);
+    }
+
+    function updateNavProgress() {
+        // Will be updated by observer, but we can force update
+    }
+
+    function updateDynamicText() {
+        // Re-render ratio summary if visible
+        if (typeof updateRatio === 'function' && !$('ratioDemo').classList.contains('hidden')) {
+            updateRatio();
+        }
+        // Re-render counter
+        if (typeof renderList === 'function') {
+            renderList();
+        }
+        // Re-render table rows labels
+        if (typeof buildInfiniteTable === 'function' && !$('tableContainer').classList.contains('hidden')) {
+            // Just update row labels
+            document.querySelectorAll('#infiniteTable .table-row .row-num').forEach((el, i) => {
+                if (!el.parentElement.classList.contains('ellipsis-row')) {
+                    el.textContent = t('g3.row', { n: i + 1 });
+                } else if (i === 0) {
+                    el.textContent = t('g3.rowN');
+                }
+            });
+        }
+        // Re-render diagonal table labels
+        if (typeof buildDiagonalTable === 'function') {
+            buildDiagonalTable();
+            // Re-apply diagonal highlights if in progress
+            for (let i = 0; i < currentDiagStep; i++) {
+                const cell = $(`cell-${i}-${i}`);
+                if (cell) {
+                    cell.classList.add('diagonal-highlight', 'diagonal-extracted');
+                }
+            }
+        }
+        // Re-render check table if visible
+        if (!$('step-4d').classList.contains('hidden') && typeof initCheckTable === 'function') {
+            initCheckTable();
+            for (let i = 0; i < currentCheckRow; i++) {
+                const row = $(`check-row-${i}`);
+                if (row && !row.classList.contains('checked')) {
+                    row.classList.add('checked');
+                    const result = row.querySelector('.check-result');
+                    if (result) {
+                        result.textContent = t('g4.checkResult', { n: i + 1 });
+                        result.className = 'check-result nomatch';
+                    }
+                }
+            }
+        }
+    }
+
     const TABLE_ROWS = 8;
     const DECIMAL_PLACES = 8;
     const INFINITE_TABLE_ROWS = 50;
@@ -140,8 +234,8 @@
             const pct = (squares / n) * 100;
             fill.style.width = pct + '%';
             skip.style.width = (100 - pct) + '%';
-            rangeVal.textContent = n.toLocaleString('zh-CN');
-            summary.innerHTML = `前 ${n.toLocaleString('zh-CN')} 个自然数中，只有 <strong style="color:var(--gold-bright)">${squares.toLocaleString('zh-CN')}</strong> 个平方数，跳过了 <strong style="color:var(--text-dim)">${(n - squares).toLocaleString('zh-CN')}</strong> 个。`;
+            rangeVal.textContent = n.toLocaleString(currentLang === 'zh' ? 'zh-CN' : 'en-US');
+            summary.innerHTML = t('a1.ratio.summary', { n: n.toLocaleString(currentLang === 'zh' ? 'zh-CN' : 'en-US'), s: squares.toLocaleString(currentLang === 'zh' ? 'zh-CN' : 'en-US'), m: (n - squares).toLocaleString(currentLang === 'zh' ? 'zh-CN' : 'en-US') });
         }
         slider.addEventListener('input', updateRatio);
         updateRatio();
@@ -307,8 +401,8 @@
 
         function renderList() {
             if (userNumbers.length === 0) {
-                list.innerHTML = '<p class="empty-hint">你的列表是空的。开始写吧。</p>';
-                counter.textContent = '你已收集了 0 个数字';
+                list.innerHTML = '<p class="empty-hint">' + t('g3.empty') + '</p>';
+                counter.textContent = t('g3.counter', { n: 0 });
                 proceed.classList.add('hidden');
             } else {
                 list.innerHTML = '';
@@ -320,7 +414,7 @@
                     chip.appendChild(rm);
                     list.appendChild(chip);
                 });
-                counter.textContent = `你已收集了 ${userNumbers.length} 个数字`;
+                counter.textContent = t('g3.counter', { n: userNumbers.length });
                 if (userNumbers.length >= 1) proceed.classList.remove('hidden');
             }
         }
@@ -361,7 +455,7 @@
         function addRows(count) {
             for (let i = 0; i < count && rowsShown < INFINITE_TABLE_ROWS; i++) {
                 const row = el('div', 'table-row');
-                row.appendChild(el('span', 'row-num', `第 ${rowsShown + 1} 行`));
+                row.appendChild(el('span', 'row-num', t('g3.row', { n: rowsShown + 1 })));
                 const val = rowsShown < userNumbers.length
                     ? formatRow(userNumbers[rowsShown])
                     : randDecimal() + '…';
@@ -373,7 +467,7 @@
             }
             if (rowsShown >= INFINITE_TABLE_ROWS && !container.querySelector('.ellipsis-row')) {
                 const er = el('div', 'table-row ellipsis-row');
-                er.appendChild(el('span', 'row-num', '第 N 行'));
+                er.appendChild(el('span', 'row-num', t('g3.rowN')));
                 er.appendChild(el('span', 'row-val ellipsis-val', '0. …'));
                 container.appendChild(er);
                 const fr = el('div', 'table-row ellipsis-row');
@@ -401,7 +495,7 @@
             currentCheckRow = 0;
             ['step-4b', 'step-4d'].forEach(id => { if ($(id)) $(id).classList.add('hidden'); });
             if ($('step-4a')) $('step-4a').classList.remove('hidden');
-            if ($('diagHint')) $('diagHint').textContent = '点击按钮，看康托如何找到对角线。';
+            if ($('diagHint')) $('diagHint').textContent = t('g4.hint');
             if ($('newNumber')) $('newNumber').textContent = '0.';
             if ($('checkConclusion')) $('checkConclusion').classList.add('hidden');
             if ($('proceed4b')) $('proceed4b').classList.add('hidden');
@@ -431,7 +525,7 @@
             const tr = document.createElement('tr');
             const label = document.createElement('td');
             label.className = 'row-label';
-            label.textContent = `第 ${i + 1} 行`;
+            label.textContent = t('g3.row', { n: i + 1 });
             tr.appendChild(label);
             const prefix = document.createElement('td');
             prefix.className = 'decimal-prefix';
@@ -456,7 +550,7 @@
         const ellipsisRow = document.createElement('tr');
         const elLabel = document.createElement('td');
         elLabel.className = 'row-label';
-        elLabel.textContent = '第 N 行';
+        elLabel.textContent = t('g3.rowN');
         ellipsisRow.appendChild(elLabel);
         const elPrefix = document.createElement('td');
         elPrefix.className = 'decimal-prefix';
@@ -505,7 +599,7 @@
         }
         currentDiagStep++;
         if (currentDiagStep >= TABLE_ROWS) {
-            $('diagHint').textContent = '对角线全部框出完毕。';
+            $('diagHint').textContent = t('g4.hintDone');
             $('step-4b').classList.remove('hidden');
             extractDiagonal();
             initFlipZone();
@@ -603,7 +697,7 @@
         for (let i = 0; i < TABLE_ROWS; i++) {
             const row = el('div', 'check-row');
             row.id = `check-row-${i}`;
-            row.appendChild(el('span', 'check-num', `第 ${i + 1} 行`));
+            row.appendChild(el('span', 'check-num', t('g3.row', { n: i + 1 })));
             const digits = el('span', 'check-digits');
             let html = '0.';
             for (let j = 0; j < DECIMAL_PLACES; j++) {
@@ -645,7 +739,7 @@
         if (!row || row.classList.contains('checked')) return;
         row.classList.add('checked');
         const result = row.querySelector('.check-result');
-        result.textContent = `第 ${i + 1} 位不同 → ✗`;
+        result.textContent = t('g4.checkResult', { n: i + 1 });
         result.className = 'check-result nomatch';
     }
 
@@ -689,7 +783,7 @@
                 if (entry.isIntersecting) {
                     const id = entry.target.id;
                     const num = id.split('-')[1];
-                    nav.textContent = `展厅 ${num} / 6`;
+                    nav.textContent = t('nav.progress', { n: num });
                 }
             });
         }, { threshold: 0.3 });
@@ -698,6 +792,21 @@
 
     // Init
     document.addEventListener('DOMContentLoaded', () => {
+        // Detect language from URL
+        const params = new URLSearchParams(window.location.search);
+        const langParam = params.get('lang');
+        if (langParam === 'en') {
+            applyLang('en');
+        } else {
+            applyLang('zh');
+        }
+
+        // Language toggle
+        $('langToggle').onclick = () => {
+            const newLang = currentLang === 'zh' ? 'en' : 'zh';
+            applyLang(newLang);
+        };
+
         initGallery1();
         initGallery2();
         initGallery3();
@@ -740,8 +849,8 @@
                 if ($('tableContainer')) $('tableContainer').classList.add('hidden');
                 if ($('proceed3')) $('proceed3').classList.add('hidden');
                 if ($('proceed3b')) $('proceed3b').classList.add('hidden');
-                if ($('numberList')) $('numberList').innerHTML = '<p class="empty-hint">你的列表是空的。开始写吧。</p>';
-                if ($('counter')) $('counter').textContent = '你已收集了 0 个数字';
+                if ($('numberList')) $('numberList').innerHTML = '<p class="empty-hint">' + t('g3.empty') + '</p>';
+                if ($('counter')) $('counter').textContent = t('g3.counter', { n: 0 });
 
                 // Reset Gallery 4
                 currentDiagStep = 0;
@@ -751,7 +860,7 @@
                 buildDiagonalTable();
                 ['step-4b', 'step-4d'].forEach(id => { if ($(id)) $(id).classList.add('hidden'); });
                 if ($('step-4a')) $('step-4a').classList.remove('hidden');
-                if ($('diagHint')) $('diagHint').textContent = '点击按钮，看康托如何找到对角线。';
+                if ($('diagHint')) $('diagHint').textContent = t('g4.hint');
                 if ($('newNumber')) $('newNumber').textContent = '0.';
                 if ($('checkConclusion')) $('checkConclusion').classList.add('hidden');
                 if ($('proceed4b')) $('proceed4b').classList.add('hidden');

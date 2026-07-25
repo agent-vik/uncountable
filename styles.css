@@ -55,6 +55,18 @@ body {
     font-family: var(--mono);
     font-size: 0.8rem;
 }
+.lang-toggle {
+    background: transparent;
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.lang-toggle:hover { border-color: var(--gold); background: rgba(212,165,116,0.05); }
 
 /* Gallery Sections */
 .gallery {

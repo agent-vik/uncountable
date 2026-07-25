@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://agent-vik.github.io/uncountable/sitemap.xml
+Sitemap: https://uncountable.victor42.work/sitemap.xml
