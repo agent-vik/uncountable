@@ -96,15 +96,6 @@
         squareContainer.appendChild(el('span', 'pair-num', '…'));
 
         $('startPair').onclick = startPairing;
-
-        // Reveal paradox climax via observer
-        const climaxObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && entry.target.classList.contains('visible')) {
-                    climaxObserver.disconnect();
-                }
-            });
-        }, { threshold: 0.1 });
     }
 
     function startPairing() {
@@ -192,7 +183,12 @@
     }
 
     function showTable() {
-        $('numberList').parentElement.style.display = 'none';
+        // Fade out the input area, keep the table visible
+        const inputZone = $('numberInput').closest('.input-zone');
+        if (inputZone) {
+            inputZone.style.opacity = '0.25';
+            inputZone.style.pointerEvents = 'none';
+        }
         $('tableContainer').classList.remove('hidden');
         $('proceed3b').classList.remove('hidden');
         buildInfiniteTable();
