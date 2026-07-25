@@ -163,7 +163,9 @@ body {
 
 /* --- Count Buttons --- */
 .count-buttons {
-    display: flex; gap: 8px; flex-wrap: wrap;
+    display: flex;
+    gap: 12px 8px;
+    flex-wrap: wrap;
     justify-content: center;
 }
 .count-btn {
