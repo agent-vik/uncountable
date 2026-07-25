@@ -253,8 +253,8 @@
         input.value = '';
         input.focus();
 
-        // Show result after 3 attempts
-        if (pairAttempts.length >= 3) {
+        // Show result after first attempt, update count on subsequent
+        if (pairAttempts.length >= 1) {
             $('attemptCount').textContent = pairAttempts.length;
             $('angle2Result').classList.remove('hidden');
             $('angle2Conclusion').classList.remove('hidden');
