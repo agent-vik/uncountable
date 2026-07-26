@@ -773,7 +773,7 @@ input[type="text"]:focus { border-color: var(--gold-dim); }
 
 /* Diagonal Table */
 .diagonal-table-container {
-    overflow-x: auto;
+    overflow: hidden;
     margin: 24px 0;
     padding: 16px;
     background: var(--bg-table);
@@ -788,12 +788,16 @@ input[type="text"]:focus { border-color: var(--gold-dim); }
     width: 100%; height: 100%;
     pointer-events: none;
     z-index: 0;
+    overflow: hidden;
 }
 table.diagonal-table {
     border-collapse: collapse;
     margin: 0 auto;
     font-family: var(--mono);
     font-size: 1.1rem;
+    max-width: 100%;
+    position: relative;
+    z-index: 1;
 }
 table.diagonal-table td {
     width: 36px; height: 36px;
