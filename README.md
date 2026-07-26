@@ -1,22 +1,22 @@
-# Uncountable · 康托对角线论证互动展
+# Uncountable · Cantor's Diagonal Argument Interactive Exhibit
 
-一个博物馆级单页互动展品，让观众亲手触摸数学史上最优雅的证明——康托对角线论证。
+A museum-grade interactive exhibit that lets visitors experience the most elegant proof in the history of mathematics — Cantor's diagonal argument.
 
-## 展览
+## Exhibition
 
-六个展厅，从直觉到震撼：
+Six galleries, from intuition to revelation:
 
-1. **直觉** — 什么是无穷？亲手计数，感受"永远加不完"
-2. **悖论** — 伽利略的困惑：平方数是自然数的子集，却能一一配对。观众亲手圈出平方数、亲手输入数字配对，自己撞出悖论
-3. **提问** — 康托问：所有的无穷都一样大吗？观众输入小数，排成表格
-4. **对角线** — 框出对角线、翻转每位数字、逐行检查。观众亲手造出一个不在表里的新数
-5. **后果** — 推导链：排不成表 → 配不上 → 更多。无穷也有大小之分
-6. **墓志铭** — 1638 年伽利略转身走开，1874 年康托走了进去
+1. **Intuition** — What is infinity? Count along and feel "endless"
+2. **Paradox** — Galileo's puzzle: perfect squares are a subset of natural numbers, yet they pair one-to-one. Visitors discover the paradox themselves
+3. **Question** — Cantor asks: are all infinities the same size? Visitors enter decimals, arrange them into a table
+4. **Diagonal** — Highlight the diagonal, increment each digit, check row by row. Visitors construct a number not in the table
+5. **Consequence** — The chain: can't be arranged → can't be paired → more. Infinity has sizes
+6. **Epitaph** — In 1638, Galileo turned away. In 1891, Cantor walked in
 
-## 在线访问
+## Live
 
 [https://uncountable.victor42.work](https://uncountable.victor42.work)
 
-## 作者
+## Authors
 
 Created by [Victor42](https://victor42.work) & [Vik](https://github.com/agent-vik/about-me)
