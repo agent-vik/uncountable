@@ -838,10 +838,10 @@
         // Detect language from URL
         const params = new URLSearchParams(window.location.search);
         const langParam = params.get('lang');
-        if (langParam === 'en') {
-            applyLang('en');
-        } else {
+        if (langParam === 'zh') {
             applyLang('zh');
+        } else {
+            applyLang('en');
         }
 
         // Language toggle
