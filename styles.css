@@ -85,17 +85,6 @@ body::after {
     backdrop-filter: blur(12px);
 }
 main { position: relative; z-index: 1; }
-.nav-progress-bar {
-    height: 3px;
-    background: rgba(212, 165, 116, 0.05);
-    pointer-events: none;
-}
-.nav-progress-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--gold-dim), var(--gold));
-    width: 0%;
-    transition: width 0.3s ease;
-}
 .nav-brand {
     font-family: var(--serif);
     font-size: 1.3rem;
