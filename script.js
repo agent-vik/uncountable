@@ -754,6 +754,16 @@
 
     // Gallery 5 // --- Gallery 5 & 6: Reveal on Scroll --- 6: Reveal
     function initGallery5() {
+        // Populate infinity comparison with user's numbers
+        const seqEl = $('infSeqRight');
+        if (seqEl) {
+            if (userNumbers.length >= 3) {
+                seqEl.textContent = userNumbers.slice(0, 3).join(', ') + ', …';
+            } else if (userNumbers.length > 0) {
+                seqEl.textContent = userNumbers.join(', ') + ', …';
+            }
+        }
+
         const lines = document.querySelectorAll('#gallery-5 .reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
