@@ -623,7 +623,19 @@
         svg.setAttribute('viewBox', '0 0 ' + cRect.width + ' ' + cRect.height);
         svg.style.width = cRect.width + 'px';
         svg.style.height = cRect.height + 'px';
-        svg.innerHTML = `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="rgba(212, 165, 116, 0.15)" stroke-width="2" stroke-dasharray="4 4" />`;
+        const gid = 'diag-grad';
+        svg.innerHTML = `
+            <defs>
+                <linearGradient id="${gid}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="rgba(212, 165, 116, 0)" />
+                    <stop offset="40%" stop-color="rgba(212, 165, 116, 0.15)" />
+                    <stop offset="50%" stop-color="rgba(240, 200, 150, 0.35)" />
+                    <stop offset="60%" stop-color="rgba(212, 165, 116, 0.15)" />
+                    <stop offset="100%" stop-color="rgba(212, 165, 116, 0)" />
+                </linearGradient>
+            </defs>
+            <line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="url(#${gid})" stroke-width="3" />
+        `;
     }
 
     function stepNextDiag() {
