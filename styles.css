@@ -171,7 +171,7 @@ main { position: relative; z-index: 1; }
 .hero-symbol {
     font-family: var(--serif);
     font-size: clamp(12rem, 36vw, 21rem);
-    color: var(--gold-bright);
+    color: var(--gold);
     line-height: 1;
     margin-bottom: 16px;
     opacity: 0.8;
@@ -787,7 +787,7 @@ input[type="text"]:focus { border-color: var(--gold-dim); }
     pointer-events: none;
     z-index: 0;
     background: linear-gradient(
-        to bottom right,
+        135deg,
         transparent 0%,
         transparent 40%,
         rgba(212, 165, 116, 0.08) 48%,
@@ -1026,7 +1026,7 @@ td.ellipsis-cell {
 .conclusion-symbol {
     font-family: var(--serif);
     font-size: clamp(9rem, 24vw, 15rem);
-    color: var(--gold-bright);
+    color: var(--gold);
     line-height: 1;
     margin-bottom: 16px;
     opacity: 0;
