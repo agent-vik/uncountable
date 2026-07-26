@@ -49,30 +49,37 @@
         // Will be updated by observer, but we can force update
     }
 
+    let ratioUpdater = null;
+
     function updateDynamicText() {
+        // Only update if elements have been initialized
         // Re-render ratio summary if visible
-        if (typeof updateRatio === 'function' && !$('ratioDemo').classList.contains('hidden')) {
-            updateRatio();
+        if (ratioUpdater && !$('ratioDemo').classList.contains('hidden')) {
+            ratioUpdater();
         }
         // Re-render counter
-        if (typeof renderList === 'function') {
-            renderList();
+        const counterEl = $('counter');
+        if (counterEl && userNumbers.length >= 0) {
+            counterEl.textContent = t('g3.counter', { n: userNumbers.length });
         }
-        // Re-render table rows labels
-        if (typeof buildInfiniteTable === 'function' && !$('tableContainer').classList.contains('hidden')) {
-            // Just update row labels
-            document.querySelectorAll('#infiniteTable .table-row .row-num').forEach((el, i) => {
-                if (!el.parentElement.classList.contains('ellipsis-row')) {
-                    el.textContent = t('g3.row', { n: i + 1 });
-                } else if (i === 0) {
-                    el.textContent = t('g3.rowN');
+        // Re-render table row labels if table is visible
+        const tableEl = $('infiniteTable');
+        if (tableEl && tableEl.children.length > 0) {
+            let idx = 0;
+            tableEl.querySelectorAll('.table-row').forEach(row => {
+                const numEl = row.querySelector('.row-num');
+                if (numEl && !row.classList.contains('ellipsis-row')) {
+                    numEl.textContent = t('g3.row', { n: idx + 1 });
+                } else if (numEl && row.classList.contains('ellipsis-row') && idx === 0) {
+                    numEl.textContent = t('g3.rowN');
                 }
+                idx++;
             });
         }
-        // Re-render diagonal table labels
-        if (typeof buildDiagonalTable === 'function') {
+        // Re-render diagonal table labels if initialized
+        const diagTable = $('diagonalTable');
+        if (diagTable && diagTable.children.length > 0 && tableData.length > 0) {
             buildDiagonalTable();
-            // Re-apply diagonal highlights if in progress
             for (let i = 0; i < currentDiagStep; i++) {
                 const cell = $(`cell-${i}-${i}`);
                 if (cell) {
@@ -81,7 +88,8 @@
             }
         }
         // Re-render check table if visible
-        if (!$('step-4d').classList.contains('hidden') && typeof initCheckTable === 'function') {
+        const checkTable = $('checkTable');
+        if (checkTable && checkTable.children.length > 0 && typeof initCheckTable === 'function') {
             initCheckTable();
             for (let i = 0; i < currentCheckRow; i++) {
                 const row = $(`check-row-${i}`);
@@ -238,6 +246,7 @@
             summary.innerHTML = t('a1.ratio.summary', { n: n.toLocaleString(currentLang === 'zh' ? 'zh-CN' : 'en-US'), s: squares.toLocaleString(currentLang === 'zh' ? 'zh-CN' : 'en-US'), m: (n - squares).toLocaleString(currentLang === 'zh' ? 'zh-CN' : 'en-US') });
         }
         slider.addEventListener('input', updateRatio);
+        ratioUpdater = updateRatio;
         updateRatio();
 
         // Navigation
