@@ -46,7 +46,7 @@
     }
 
     function updateNavProgress() {
-        // Will be updated by observer, but we can force update
+        // Placeholder — nav text updated by IntersectionObserver in initNavProgress
     }
 
     let ratioUpdater = null;
@@ -54,7 +54,7 @@
     function updateDynamicText() {
         // Only update if elements have been initialized
         // Re-render ratio summary if visible
-        if (ratioUpdater && !$('ratioDemo').classList.contains('hidden')) {
+        if (ratioUpdater && $('ratioDemo') && !$('ratioDemo').classList.contains('hidden')) {
             ratioUpdater();
         }
         // Re-render counter
@@ -337,9 +337,10 @@
     }
 
     function formatNumber(n) {
+        const locale = currentLang === 'zh' ? 'zh-CN' : 'en-US';
         if (n === 0) return '0';
         const str = n.toString();
-        if (str.length <= 12) return n.toLocaleString('zh-CN');
+        if (str.length <= 12) return n.toLocaleString(locale);
         // Large numbers
         const exp = Math.floor(Math.log10(Math.abs(n)));
         const mantissa = n / Math.pow(10, exp);
@@ -353,7 +354,7 @@
         if (!val) return;
         const n = parseInt(val, 10);
         if (isNaN(n) || n < 1 || !Number.isInteger(n)) {
-            result.innerHTML = '<p style="color:var(--error)">请输入一个正整数。</p>';
+            result.innerHTML = '<p style="color:var(--error)">' + t('a2.error') + '</p>';
             return;
         }
 
@@ -748,11 +749,13 @@
         if (!row || row.classList.contains('checked')) return;
         row.classList.add('checked');
         const result = row.querySelector('.check-result');
-        result.textContent = t('g4.checkResult', { n: i + 1 });
-        result.className = 'check-result nomatch';
+        if (result) {
+            result.textContent = t('g4.checkResult', { n: i + 1 });
+            result.className = 'check-result nomatch';
+        }
     }
 
-    // Gallery 5 // --- Gallery 5 & 6: Reveal on Scroll --- 6: Reveal
+    // Gallery 5 & 6: Reveal
     function initGallery5() {
         // Populate infinity comparison with user's numbers
         const seqEl = $('infSeqRight');

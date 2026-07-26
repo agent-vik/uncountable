@@ -789,28 +789,6 @@ td.ellipsis-cell {
     margin-top: 12px;
 }
 
-/* Diagonal Extract */
-.diagonal-extract {
-    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-    margin: 24px 0;
-}
-.extract-card {
-    width: 48px; height: 48px;
-    display: flex; align-items: center; justify-content: center;
-    background: var(--bg-card);
-    border: 2px solid var(--gold-dim);
-    border-radius: 8px;
-    font-family: var(--mono);
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--gold-bright);
-    animation: extractPop 0.5s ease;
-}
-@keyframes extractPop {
-    from { opacity: 0; transform: scale(0.5) translateY(-20px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
 /* Flip Zone */
 .flip-zone {
     display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
