@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0a0a0f">
-    <meta name="description" content="康托对角线证明互动展品 — 在博物馆级体验中亲手触摸数学史最优雅的证明。六个展厅，从伽利略的悖论到康托的天才一击，亲手发现无穷不止一种。">
-    <meta name="keywords" content="康托, 对角线, 对角线证明, 不可数, 无穷, 伽利略悖论, 集合论, 数学证明, 互动展品, Cantor's diagonal argument, uncountable, infinity, mathematics">
+    <meta name="description" content="康托对角线论证互动展品 — 在博物馆级体验中亲手触摸数学史最优雅的证明。六个展厅，从伽利略的悖论到康托的天才一击，亲手发现无穷不止一种。">
+    <meta name="keywords" content="康托, 对角线, 对角线论证, 不可数, 无穷, 伽利略悖论, 集合论, 数学证明, 互动展品, Cantor's diagonal argument, uncountable, infinity, mathematics">
     <meta name="author" content="Agent Vik & Victor42">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://uncountable.victor42.work/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://uncountable.victor42.work/">
-    <meta property="og:title" content="Uncountable · 康托对角线证明互动展">
+    <meta property="og:title" content="Uncountable · 康托对角线论证互动展">
     <meta property="og:description" content="在博物馆级体验中亲手触摸数学史最优雅的证明。六个展厅，从伽利略的悖论到康托的天才一击。">
     <meta property="og:locale" content="zh_CN">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://uncountable.victor42.work/">
-    <meta name="twitter:title" content="Uncountable · 康托对角线证明互动展">
+    <meta name="twitter:title" content="Uncountable · 康托对角线论证互动展">
     <meta name="twitter:description" content="在博物馆级体验中亲手触摸数学史最优雅的证明。亲手发现无穷不止一种。">
-    <title>Uncountable · 康托对角线证明互动展</title>
+    <title>Uncountable · 康托对角线论证互动展</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -31,10 +31,10 @@
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Uncountable · 康托对角线证明互动展",
+        "name": "Uncountable · 康托对角线论证互动展",
         "alternateName": "Cantor's Diagonal Argument Interactive Exhibit",
         "url": "https://uncountable.victor42.work/",
-        "description": "康托对角线证明互动展品 — 在博物馆级体验中亲手触摸数学史最优雅的证明。",
+        "description": "康托对角线论证互动展品 — 在博物馆级体验中亲手触摸数学史最优雅的证明。",
         "inLanguage": "zh-CN",
         "author": {
             "@type": "Organization",
@@ -50,10 +50,10 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "什么是康托对角线证明？",
+                "name": "什么是康托对角线论证？",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "康托对角线证明是数学家格奥尔格·康托尔在1874年提出的论证，证明了0到1之间的实数比自然数更多。它通过构造一个对角线上的新数字，证明无论你怎么排列，总有一个数字不在表里。"
+                    "text": "康托对角线论证是数学家格奥尔格·康托尔在1891年发表的论证，证明了0到1之间的实数比自然数更多。它通过构造一个对角线上的新数字，证明无论你怎么排列，总有一个数字不在表里。1874年，康托首次证明实数不可数，但用的是另一种方法。"
                 }
             },
             {
@@ -69,7 +69,7 @@
                 "name": "无穷之间真的有大小之分吗？",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "是的。自然数和小数都是无穷多的，但0到1之间的小数比所有自然数还要多。能一一配对的两个无穷一样大，配不上的就更大。对角线证明就是康托用来确立这一结论的方法。"
+                    "text": "是的。自然数和小数都是无穷多的，但0到1之间的小数比所有自然数还要多。能一一配对的两个无穷一样大，配不上的就更大。对角线论证就是康托用来确立这一结论的方法。"
                 }
             }
         ]
@@ -346,7 +346,7 @@
             </div>
 
             <div class="step hidden" id="step-4b">
-                <p class="narration-text" data-i18n="g4.flip.intro">把对角线上的数字拎出来，每个加 1。<br>如果到 9 就变成 0。</p>
+                <p class="narration-text" data-i18n="g4.flip.intro">把对角线上的数字拎出来。<br>如果是 1 就改成 2，否则改成 1。这样构造出的新数在第 n 位上一定与第 n 行不同。</p>
                 <div class="flip-zone" id="flipZone"></div>
                 <div class="new-number-display">
                     <span class="label" data-i18n="g4.flip.new">新数字：</span>
@@ -366,6 +366,7 @@
                 <button type="button" id="checkNext" class="btn-primary" data-i18n="g4.checkNext">检查下一行</button>
                 <button type="button" id="checkAll" class="btn-ghost" data-i18n="g4.checkAll">全部检查</button>
                 <p class="conclusion-text hidden" id="checkConclusion" data-i18n="g4.checkConclusion">没有一行能匹配。不管你往表里加多少数进去，这个新数字永远不在表里。因为表里每个数字总有至少一位和这个新数字不一样，那必然就不是同一个数。</p>
+                <p class="narration-text hidden" id="finiteNote" data-i18n="g4.finite">屏幕只展示有限行和有限位，便于观察；完整论证会对无限多行逐一改变对应位置的数字。</p>
                 <button type="button" id="proceed4d" class="btn-secondary hidden" data-i18n="g4.continue">继续 →</button>
             </div>
         </div>
@@ -383,7 +384,7 @@
                 <p class="conclusion-line reveal highlight" data-i18n="g5.l3">矛盾。</p>
                 <div class="conclusion-gap"></div>
                 <p class="conclusion-line reveal" data-i18n="g5.l4">所以——那张表从来就不完整。</p>
-                <p class="conclusion-line reveal" data-i18n="g5.l5">不管你怎么排，对角线每位 +1 总能造出一个不在表里的数字。</p>
+                <p class="conclusion-line reveal" data-i18n="g5.l5">不管你怎么排，对角线上的规则总能造出一个不在表里的数字。</p>
                 <div class="conclusion-gap"></div>
                 <p class="conclusion-line reveal" data-i18n="g5.l6">排成表，意味着每个小数都有一个编号——</p>
                 <p class="conclusion-line reveal" data-i18n="g5.l7">第 1 个、第 2 个、第 3 个……</p>
@@ -443,7 +444,7 @@
                 <div class="conclusion-gap"></div>
                 <div class="final-epitaph reveal">
                     <img src="assets/cantor.webp" alt="Georg Cantor" class="portrait" loading="lazy">
-                    <p data-i18n="g6.e2.year">1874 年</p>
+                    <p data-i18n="g6.e2.year">1891 年</p>
                     <p data-i18n="g6.e2.text">康托走了进去。</p>
                 </div>
                 <div class="conclusion-gap"></div>

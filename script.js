@@ -125,7 +125,7 @@
         for (let i = 0; i < DECIMAL_PLACES; i++) s += randDigit();
         return s;
     }
-    function flipDigit(d) { return (d + 1) % 10; }
+    function flipDigit(d) { return d === 1 ? 2 : 1; }
     function $(id) {
         const el = document.getElementById(id);
         if (!el) console.warn('[Uncountable] Element not found:', id);
@@ -527,6 +527,7 @@
             if ($('diagHint')) $('diagHint').textContent = t('g4.hint');
             if ($('newNumber')) $('newNumber').textContent = '0.';
             if ($('checkConclusion')) $('checkConclusion').classList.add('hidden');
+                if ($('finiteNote')) $('finiteNote').classList.add('hidden');
             if ($('proceed4b')) $('proceed4b').classList.add('hidden');
             if ($('proceed4d')) $('proceed4d').classList.add('hidden');
             $('gallery-4').scrollIntoView({ behavior: 'smooth' });
@@ -747,6 +748,7 @@
         currentCheckRow++;
         if (currentCheckRow >= TABLE_ROWS) {
             $('checkConclusion').classList.remove('hidden');
+            $('finiteNote').classList.remove('hidden');
             $('proceed4d').classList.remove('hidden');
         }
     }
@@ -756,6 +758,7 @@
             if (currentCheckRow >= TABLE_ROWS) {
                 clearInterval(interval);
                 $('checkConclusion').classList.remove('hidden');
+                $('finiteNote').classList.remove('hidden');
                 $('proceed4d').classList.remove('hidden');
                 return;
             }
@@ -900,6 +903,7 @@
                 if ($('diagHint')) $('diagHint').textContent = t('g4.hint');
                 if ($('newNumber')) $('newNumber').textContent = '0.';
                 if ($('checkConclusion')) $('checkConclusion').classList.add('hidden');
+                if ($('finiteNote')) $('finiteNote').classList.add('hidden');
                 if ($('proceed4b')) $('proceed4b').classList.add('hidden');
                 if ($('proceed4d')) $('proceed4d').classList.add('hidden');
 
