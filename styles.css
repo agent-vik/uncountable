@@ -170,8 +170,8 @@ main { position: relative; z-index: 1; }
 .hero-question { text-align: center; padding: 40px 0 32px; }
 .hero-symbol {
     font-family: var(--serif);
-    font-size: clamp(4rem, 12vw, 7rem);
-    color: var(--gold);
+    font-size: clamp(12rem, 36vw, 21rem);
+    color: var(--gold-bright);
     line-height: 1;
     margin-bottom: 16px;
     opacity: 0.8;
@@ -1025,8 +1025,8 @@ td.ellipsis-cell {
 .conclusion-sequence { max-width: 560px; margin: 0 auto; text-align: center; }
 .conclusion-symbol {
     font-family: var(--serif);
-    font-size: clamp(3rem, 8vw, 5rem);
-    color: var(--gold);
+    font-size: clamp(9rem, 24vw, 15rem);
+    color: var(--gold-bright);
     line-height: 1;
     margin-bottom: 16px;
     opacity: 0;
