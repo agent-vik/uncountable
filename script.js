@@ -329,6 +329,13 @@
         $('statMissed').textContent = missed;
         $('statWrong').textContent = wrong;
 
+        // Switch label from 'skipped' to 'missed'
+        const missedLabel = $('statMissedLabel');
+        if (missedLabel) {
+            missedLabel.textContent = t('a1.stat.missed');
+            missedLabel.setAttribute('data-i18n', 'a1.stat.missed');
+        }
+
         $('checkGrid').classList.add('hidden');
         $('angle1Result').classList.remove('hidden');
         $('ratioDemo').classList.remove('hidden');
