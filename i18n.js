@@ -76,13 +76,13 @@ var I18N = {
         'col.key2': '部分怎么能等于整体？',
         'col.outro1': '伽利略的反应是：<em>"无限不可比较。"</em>',
         'col.outro2': '他选择了转身走开。',
-        'col.next': '250 年后，有人走了进来 →',
+        'col.next': '两个半世纪后，有人走了进来 →',
 
         // Gallery 3
         'g3.number': '展厅 3',
         'g3.title': 'The Question',
         'g3.subtitle': '提问',
-        'g3.intro1': '250 年后，<strong>格奥尔格·康托尔</strong>问了一个人没问过的问题：',
+        'g3.intro1': '两个半世纪后，<strong>格奥尔格·康托尔</strong>问了一个人没问过的问题：',
         'g3.quote': '所有的无穷，都一样大吗？',
         'g3.instruction': '他先问了一件具体的事：0 和 1 之间的小数，能排成一张表吗？<br>试着写几个 0 到 1 之间的小数（建议至少 8 个）。',
         'g3.input.placeholder': '输入一个小数…',
@@ -241,13 +241,13 @@ var I18N = {
         'col.key2': 'How can a part equal the whole?',
         'col.outro1': 'Galileo\'s response: <em>"Infinity cannot be compared."</em>',
         'col.outro2': 'He turned and walked away.',
-        'col.next': '250 years later, someone walked in →',
+        'col.next': 'Two and a half centuries later, someone walked in →',
 
         // Gallery 3
         'g3.number': 'Gallery 3',
         'g3.title': 'The Question',
         'g3.subtitle': 'Question',
-        'g3.intro1': '250 years later, <strong>Georg Cantor</strong> asked a question no one had asked:',
+        'g3.intro1': 'Two and a half centuries later, <strong>Georg Cantor</strong> asked a question no one had asked:',
         'g3.quote': 'Are all infinities the same size?',
         'g3.instruction': 'He asked something specific first: can the decimals between 0 and 1 be arranged in a list?<br>Try writing a few decimals between 0 and 1 (at least 8 recommended).',
         'g3.input.placeholder': 'Enter a decimal...',
