@@ -59,8 +59,13 @@
         }
         // Re-render counter
         const counterEl = $('counter');
-        if (counterEl && userNumbers.length >= 0) {
+        if (counterEl) {
             counterEl.textContent = t('g3.counter', { n: userNumbers.length });
+        }
+        // Re-render number list empty hint
+        const numList = $('numberList');
+        if (numList && userNumbers.length === 0) {
+            numList.innerHTML = '<p class="empty-hint" data-i18n="g3.empty">' + t('g3.empty') + '</p>';
         }
         // Re-render table row labels if table is visible
         const tableEl = $('infiniteTable');
@@ -420,7 +425,7 @@
 
         function renderList() {
             if (userNumbers.length === 0) {
-                list.innerHTML = '<p class="empty-hint">' + t('g3.empty') + '</p>';
+                list.innerHTML = '<p class="empty-hint" data-i18n="g3.empty">' + t('g3.empty') + '</p>';
                 counter.textContent = t('g3.counter', { n: 0 });
                 proceed.classList.add('hidden');
             } else {
@@ -887,7 +892,7 @@
                 if ($('tableContainer')) $('tableContainer').classList.add('hidden');
                 if ($('proceed3')) $('proceed3').classList.add('hidden');
                 if ($('proceed3b')) $('proceed3b').classList.add('hidden');
-                if ($('numberList')) $('numberList').innerHTML = '<p class="empty-hint">' + t('g3.empty') + '</p>';
+                if ($('numberList')) $('numberList').innerHTML = '<p class="empty-hint" data-i18n="g3.empty">' + t('g3.empty') + '</p>';
                 if ($('counter')) $('counter').textContent = t('g3.counter', { n: 0 });
 
                 // Reset Gallery 4
