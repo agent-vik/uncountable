@@ -830,6 +830,13 @@ td.ellipsis-cell {
     border: 1px solid rgba(58, 56, 51, 0.2);
 }
 
+.narration-text.finite-note {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: 12px 0;
+}
+
 /* Step Controls */
 .step { margin: 24px 0; text-align: center; }
 .step-controls {
