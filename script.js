@@ -46,7 +46,7 @@
     }
 
     function updateNavProgress() {
-        // Placeholder — nav text updated by IntersectionObserver in initNavProgress
+        // Nav text is updated by IntersectionObserver in initNavProgress
     }
 
     let ratioUpdater = null;
@@ -172,7 +172,7 @@
             btn.onclick = () => {
                 const add = parseInt(btn.dataset.add, 10);
                 count += add;
-                display.textContent = count.toLocaleString('zh-CN');
+                display.textContent = count.toLocaleString(currentLang === 'zh' ? 'zh-CN' : 'en-US');
                 display.classList.add('bump');
                 setTimeout(() => display.classList.remove('bump'), 150);
                 if (count >= 10 && hint.classList.contains('hidden')) {
@@ -232,7 +232,7 @@
 
         // Ratio slider
         const slider = $('rangeSlider');
-        const rangeVal = $('rangeVal');
+        const label = $('ratioLabel');
         const fill = $('ratioFill');
         const skip = $('ratioSkip');
         const summary = $('ratioSummary');
@@ -242,8 +242,10 @@
             const pct = (squares / n) * 100;
             fill.style.width = pct + '%';
             skip.style.width = (100 - pct) + '%';
-            rangeVal.textContent = n.toLocaleString(currentLang === 'zh' ? 'zh-CN' : 'en-US');
-            summary.innerHTML = t('a1.ratio.summary', { n: n.toLocaleString(currentLang === 'zh' ? 'zh-CN' : 'en-US'), s: squares.toLocaleString(currentLang === 'zh' ? 'zh-CN' : 'en-US'), m: (n - squares).toLocaleString(currentLang === 'zh' ? 'zh-CN' : 'en-US') });
+            const locale = currentLang === 'zh' ? 'zh-CN' : 'en-US';
+            const nStr = n.toLocaleString(locale);
+            if (label) label.innerHTML = t('a1.ratio.label', { n: nStr });
+            summary.innerHTML = t('a1.ratio.summary', { n: nStr, s: squares.toLocaleString(locale), m: (n - squares).toLocaleString(locale) });
         }
         slider.addEventListener('input', updateRatio);
         ratioUpdater = updateRatio;
@@ -329,7 +331,7 @@
         $('statMissed').textContent = missed;
         $('statWrong').textContent = wrong;
 
-        // Switch label from 'skipped' to 'missed'
+        // Update label to 'missed' after checking
         const missedLabel = $('statMissedLabel');
         if (missedLabel) {
             missedLabel.textContent = t('a1.stat.missed');

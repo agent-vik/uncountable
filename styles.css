@@ -58,16 +58,6 @@ body::before {
     z-index: 0;
 }
 
-/* Floating digits background */
-body::after {
-    content: '';
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 0;
-}
-
 /* Nav Bar */
 .nav-bar {
     position: fixed; top: 0; left: 0; right: 0;
@@ -493,7 +483,6 @@ main { position: relative; z-index: 1; }
     font-size: 0.85rem;
     color: var(--text-dim);
 }
-.ratio-controls #rangeVal { color: var(--gold-bright); font-weight: 600; }
 input[type=range] {
     width: 100%;
     margin-top: 8px;
