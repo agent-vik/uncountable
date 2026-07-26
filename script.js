@@ -576,7 +576,7 @@
             table.appendChild(tr);
         }
 
-        // Ellipsis row: 第 N 行
+        // Ellipsis row
         const ellipsisRow = document.createElement('tr');
         const elLabel = document.createElement('td');
         elLabel.className = 'row-label';

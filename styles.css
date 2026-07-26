@@ -430,12 +430,6 @@ main { position: relative; z-index: 1; }
     letter-spacing: 0.03em;
 }
 
-.strike {
-    color: var(--text-faint);
-    text-decoration: line-through;
-    text-decoration-color: var(--error);
-}
-
 .scroll-hint-static {
     text-align: center;
     color: var(--text-faint);
