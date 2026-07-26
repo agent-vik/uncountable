@@ -773,7 +773,7 @@ input[type="text"]:focus { border-color: var(--gold-dim); }
     overflow: hidden;
     margin: 24px 0;
     padding: 16px;
-    background: var(--bg-table);
+    background: transparent;
     border: 1px solid rgba(212, 165, 116, 0.15);
     border-radius: 8px;
     box-shadow: 0 0 40px rgba(212, 165, 116, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.02);
@@ -789,7 +789,7 @@ input[type="text"]:focus { border-color: var(--gold-dim); }
     pointer-events: none;
     z-index: 0;
     background: linear-gradient(
-        135deg,
+        225deg,
         transparent 44%,
         rgba(212, 165, 116, 0.08) 48%,
         rgba(240, 200, 150, 0.12) 50%,
