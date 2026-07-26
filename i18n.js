@@ -45,7 +45,7 @@ var I18N = {
         'a1.ratio.out': '被跳过',
         'a1.ratio.label': '范围：前 {n} 个自然数',
         'a1.ratio.summary': '前 {n} 个自然数中，只有 <strong style="color:var(--gold-bright)">{s}</strong> 个平方数，跳过了 <strong style="color:var(--text-dim)">{m}</strong> 个。',
-        'a1.conclusion': '结论一：平方数比自然数少。越往后越稀疏，几乎全是被跳过的。',
+        'a1.conclusion': '结论一：平方数比自然数少，只是自然数里非常少的一部分。',
         'a1.next': '换一个角度看 →',
 
         // Angle 2
@@ -60,7 +60,7 @@ var I18N = {
         'a2.result1': '你试了 <strong id="attemptCount">0</strong> 个数，每一个都配上了。',
         'a2.result2': '再试几个？或者——你觉得能找到一个配不上的吗？',
         'a2.result3': '事实上，<em>任何</em>自然数 n 都有对应的 n²。这条规则没有例外。',
-        'a2.conclusion': '结论二：平方数和自然数一样多。每一个都能配上，一个不少。',
+        'a2.conclusion': '结论二：平方数和自然数一样多，每个自然数都能唯一对应一个平方数。',
         'a2.next': '两个角度放在一起看 →',
 
         // Collision
@@ -210,7 +210,7 @@ var I18N = {
         'a1.ratio.out': 'Skipped',
         'a1.ratio.label': 'Range: first {n} natural numbers',
         'a1.ratio.summary': 'Out of the first {n} natural numbers, only <strong style="color:var(--gold-bright)">{s}</strong> are squares, skipping <strong style="color:var(--text-dim)">{m}</strong>.',
-        'a1.conclusion': 'Conclusion 1: Squares are fewer than natural numbers. The further you go, the sparser they get.',
+        'a1.conclusion': 'Conclusion 1: Squares are fewer than natural numbers — just a tiny fraction of them.',
         'a1.next': 'Try another angle →',
 
         // Angle 2
@@ -225,7 +225,7 @@ var I18N = {
         'a2.result1': 'You tried <strong id="attemptCount">0</strong> numbers, and every one paired up.',
         'a2.result2': 'Try a few more? Or — do you think you can find one that won\'t pair?',
         'a2.result3': 'In fact, <em>every</em> natural number n has a corresponding n². No exceptions.',
-        'a2.conclusion': 'Conclusion 2: Squares and natural numbers are equally numerous. Every one pairs up.',
+        'a2.conclusion': 'Conclusion 2: Squares and natural numbers are equally numerous — each natural number uniquely maps to a square.',
         'a2.next': 'Put both angles together →',
 
         // Collision
