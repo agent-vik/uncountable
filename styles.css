@@ -170,7 +170,7 @@ main { position: relative; z-index: 1; }
 .hero-question { text-align: center; padding: 40px 0 32px; }
 .hero-symbol {
     font-family: var(--serif);
-    font-size: clamp(24rem, 72vw, 42rem);
+    font-size: clamp(12rem, 36vw, 21rem);
     color: var(--gold);
     line-height: 1;
     margin-bottom: 16px;
@@ -781,24 +781,21 @@ input[type="text"]:focus { border-color: var(--gold-dim); }
 }
 /* Diagonal light band for Gallery 4 */
 .gallery-4 { position: relative; }
-.gallery-4 > .gallery-inner > .diag-band {
+.gallery-4::before {
+    content: '';
     position: absolute;
-    top: 50%; left: -50%;
-    width: 200%;
-    height: 60px;
-    background: linear-gradient(90deg,
-        transparent 0%,
-        transparent 15%,
-        rgba(212, 165, 116, 0.08) 35%,
-        rgba(240, 200, 150, 0.12) 50%,
-        rgba(212, 165, 116, 0.08) 65%,
-        transparent 85%,
-        transparent 100%
-    );
-    transform: translateY(-50%) rotate(45deg);
-    transform-origin: center center;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     pointer-events: none;
     z-index: 0;
+    background: linear-gradient(
+        135deg,
+        transparent 44%,
+        rgba(212, 165, 116, 0.08) 48%,
+        rgba(240, 200, 150, 0.12) 50%,
+        rgba(212, 165, 116, 0.08) 52%,
+        transparent 56%
+    );
 }
 
 table.diagonal-table {
@@ -1029,7 +1026,7 @@ td.ellipsis-cell {
 .conclusion-sequence { max-width: 560px; margin: 0 auto; text-align: center; }
 .conclusion-symbol {
     font-family: var(--serif);
-    font-size: clamp(18rem, 48vw, 30rem);
+    font-size: clamp(9rem, 24vw, 15rem);
     color: var(--gold);
     line-height: 1;
     margin-bottom: 16px;
