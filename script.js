@@ -597,6 +597,33 @@
         fTail.textContent = '…';
         finalRow.appendChild(fTail);
         table.appendChild(finalRow);
+
+        // Draw precise diagonal line
+        drawDiagonalLine();
+    }
+
+    function drawDiagonalLine() {
+        const svg = $('diagonalLineSvg');
+        if (!svg) return;
+        const cell00 = $('cell-0-0');
+        const cell77 = $('cell-' + (TABLE_ROWS - 1) + '-' + (DECIMAL_PLACES - 1));
+        if (!cell00 || !cell77) return;
+
+        const container = svg.parentElement;
+        const cRect = container.getBoundingClientRect();
+        const r0 = cell00.getBoundingClientRect();
+        const r1 = cell77.getBoundingClientRect();
+
+        // Centers relative to container
+        const x1 = r0.left - cRect.left + r0.width / 2;
+        const y1 = r0.top - cRect.top + r0.height / 2;
+        const x2 = r1.left - cRect.left + r1.width / 2;
+        const y2 = r1.top - cRect.top + r1.height / 2;
+
+        svg.setAttribute('viewBox', '0 0 ' + cRect.width + ' ' + cRect.height);
+        svg.style.width = cRect.width + 'px';
+        svg.style.height = cRect.height + 'px';
+        svg.innerHTML = `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="rgba(212, 165, 116, 0.15)" stroke-width="2" stroke-dasharray="4 4" />`;
     }
 
     function stepNextDiag() {
