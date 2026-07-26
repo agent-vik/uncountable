@@ -125,7 +125,7 @@
         for (let i = 0; i < DECIMAL_PLACES; i++) s += randDigit();
         return s;
     }
-    function flipDigit(d) { return d === 1 ? 2 : 1; }
+    function flipDigit(d) { return (d + 1) % 10; }
     function $(id) {
         const el = document.getElementById(id);
         if (!el) console.warn('[Uncountable] Element not found:', id);
