@@ -68,29 +68,6 @@ body::after {
     z-index: 0;
 }
 
-/* Floating digits */
-.floating-digits {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-}
-.float-digit {
-    position: absolute;
-    font-family: var(--mono);
-    color: var(--gold);
-    animation: floatDrift linear infinite;
-}
-@keyframes floatDrift {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    25% { transform: translate(30px, -40px) rotate(5deg); }
-    50% { transform: translate(-20px, -80px) rotate(-3deg); }
-    75% { transform: translate(40px, -60px) rotate(4deg); }
-    100% { transform: translate(0, 0) rotate(0deg); }
-}
-
 /* Infinity symbol breath (Gallery 6) */
 .gallery-6::after {
     content: '∞';
@@ -146,6 +123,11 @@ main { position: relative; z-index: 1; }
     color: var(--text-dim);
     font-family: var(--mono);
     font-size: 0.8rem;
+}
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 .lang-toggle {
     background: transparent;

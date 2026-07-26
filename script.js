@@ -825,29 +825,8 @@
         }, { passive: true });
     }
 
-    // Floating digits background
-    function initFloatingDigits() {
-        const container = document.createElement('div');
-        container.className = 'floating-digits';
-        document.body.appendChild(container);
-        const digits = ['0','1','2','3','4','5','6','7','8','9'];
-        for (let i = 0; i < 20; i++) {
-            const span = document.createElement('span');
-            span.className = 'float-digit';
-            span.textContent = digits[Math.floor(Math.random() * 10)];
-            span.style.left = Math.random() * 100 + '%';
-            span.style.top = Math.random() * 100 + '%';
-            span.style.fontSize = (0.8 + Math.random() * 2) + 'rem';
-            span.style.animationDuration = (15 + Math.random() * 20) + 's';
-            span.style.animationDelay = (Math.random() * -30) + 's';
-            span.style.opacity = (0.015 + Math.random() * 0.02);
-            container.appendChild(span);
-        }
-    }
-
     // Init
     document.addEventListener('DOMContentLoaded', () => {
-        initFloatingDigits();
         // Detect language from URL
         const params = new URLSearchParams(window.location.search);
         const langParam = params.get('lang');
