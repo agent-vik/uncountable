@@ -157,7 +157,7 @@ var I18N = {
         'g6.e1.text': '伽利略看到了无穷的影子，转身走开。',
         'g6.e2.year': '1891 年',
         'g6.e2.text': '康托走了进去。',
-        'g6.e3.l1': '人类第一次知道，无限不止一种。',
+        'g6.e3.l1': '人类第一次确认，无限不止一种。',
         'g6.e3.l2': '有些无限，比另一些无限更大。',
         'g6.restart': '从头看一遍 ↻',
 
@@ -322,7 +322,7 @@ var I18N = {
         'g6.e1.text': 'Galileo glimpsed the shadow of infinity, and turned away.',
         'g6.e2.year': '1891',
         'g6.e2.text': 'Cantor walked in.',
-        'g6.e3.l1': 'For the first time, humanity knew infinity wasn\'t one kind.',
+        'g6.e3.l1': 'For the first time, humanity confirmed infinity wasn\'t one kind.',
         'g6.e3.l2': 'Some infinities are bigger than others.',
         'g6.restart': 'Start over ↻',
 
