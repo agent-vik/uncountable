@@ -1,5 +1,5 @@
 // Uncountable — i18n (zh-CN / en)
-const I18N = {
+var I18N = {
     'zh': {
         // Nav
         'nav.progress': '展厅 {n} / 6',
