@@ -844,12 +844,12 @@ td.ellipsis-cell {
     margin-top: 12px;
 }
 
-/* Flip Zone */
-.flip-zone {
+/* Increment Zone */
+.increment-zone {
     display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
     margin: 24px 0;
 }
-.flip-card {
+.increment-card {
     width: 56px; height: 56px;
     position: relative;
     overflow: hidden;
@@ -859,11 +859,11 @@ td.ellipsis-cell {
     border: 2px solid var(--gold-dim);
     transition: background 0.5s ease 0.3s, border-color 0.5s ease 0.3s;
 }
-.flip-card.flipped {
+.increment-card.incremented {
     background: var(--gold);
     border-color: var(--gold);
 }
-.flip-card-num {
+.increment-card-num {
     position: absolute;
     left: 0; right: 0;
     display: flex; align-items: center; justify-content: center;
@@ -871,18 +871,18 @@ td.ellipsis-cell {
     font-family: var(--mono); font-size: 1.4rem; font-weight: 700;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.flip-card-num.old {
+.increment-card-num.old {
     top: 0;
     color: var(--gold-bright);
 }
-.flip-card-num.new {
+.increment-card-num.new {
     top: -100%;
     color: var(--bg);
 }
-.flip-card.flipped .flip-card-num.old {
+.increment-card.incremented .increment-card-num.old {
     transform: translateY(100%);
 }
-.flip-card.flipped .flip-card-num.new {
+.increment-card.incremented .increment-card-num.new {
     transform: translateY(100%);
 }
 
@@ -1112,8 +1112,8 @@ td.ellipsis-cell {
     .gallery { padding: 100px 16px 60px; }
     .input-row { flex-direction: column; align-items: center; }
     table.diagonal-table td { width: 28px; height: 28px; font-size: 0.9rem; }
-    .flip-card { width: 44px; height: 44px; }
-    .flip-card-front, .flip-card-back { font-size: 1.1rem; }
+    .increment-card { width: 44px; height: 44px; }
+    .increment-card-front, .increment-card-back { font-size: 1.1rem; }
     .conclusion-line.big { font-size: 1.3rem; }
     .pair-zone { gap: 12px; }
     .pair-col { min-width: 140px; }

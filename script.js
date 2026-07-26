@@ -114,7 +114,7 @@
     let userNumbers = [];
     let tableData = [];
     let diagonalDigits = [];
-    let flippedDigits = [];
+    let incrementedDigits = [];
     let currentDiagStep = 0;
     let currentCheckRow = 0;
 
@@ -125,7 +125,7 @@
         for (let i = 0; i < DECIMAL_PLACES; i++) s += randDigit();
         return s;
     }
-    function flipDigit(d) { return (d + 1) % 10; }
+    function incrementDigit(d) { return (d + 1) % 10; }
     function $(id) {
         const el = document.getElementById(id);
         if (!el) console.warn('[Uncountable] Element not found:', id);
@@ -520,7 +520,7 @@
             }
             // Reset diagonal steps
             currentDiagStep = 0;
-            flippedDigits = [];
+            incrementedDigits = [];
             currentCheckRow = 0;
             ['step-4b', 'step-4d'].forEach(id => { if ($(id)) $(id).classList.add('hidden'); });
             if ($('step-4a')) $('step-4a').classList.remove('hidden');
@@ -541,7 +541,7 @@
         $('nextDiag').onclick = stepNextDiag;
         $('autoDiag').onclick = autoPlayDiag;
         $('proceed4b').onclick = () => showStep('step-4d', 'step-4b');
-        $('flipAll').onclick = flipAllDigits;
+        $('incrementAll').onclick = incrementAllDigits;
         $('checkNext').onclick = () => checkNextRow();
         $('checkAll').onclick = () => checkAllRows();
         $('proceed4d').onclick = () => $('gallery-5').scrollIntoView({ behavior: 'smooth' });
@@ -633,7 +633,7 @@
             $('diagHint').textContent = t('g4.hintDone');
             $('step-4b').classList.remove('hidden');
             extractDiagonal();
-            initFlipZone();
+            initIncrementZone();
         }
     }
 
@@ -662,23 +662,23 @@
         }
     }
 
-    function initFlipZone() {
-        const zone = $('flipZone');
+    function initIncrementZone() {
+        const zone = $('incrementZone');
         zone.innerHTML = '';
-        flippedDigits = [];
+        incrementedDigits = [];
 
         diagonalDigits.forEach((d, i) => {
-            const card = el('div', 'flip-card');
-            const oldNum = el('div', 'flip-card-num old', d);
-            const newNum = el('div', 'flip-card-num new', flipDigit(d));
+            const card = el('div', 'increment-card');
+            const oldNum = el('div', 'increment-card-num old', d);
+            const newNum = el('div', 'increment-card-num new', incrementDigit(d));
             card.appendChild(oldNum);
             card.appendChild(newNum);
             card.onclick = () => {
-                if (!card.classList.contains('flipped')) {
-                    card.classList.add('flipped');
-                    flippedDigits.push({ index: i, original: d, flipped: flipDigit(d) });
+                if (!card.classList.contains('incremented')) {
+                    card.classList.add('incremented');
+                    incrementedDigits.push({ index: i, original: d, incremented: incrementDigit(d) });
                     updateNewNumber();
-                    if (flippedDigits.length === diagonalDigits.length) {
+                    if (incrementedDigits.length === diagonalDigits.length) {
                         $('proceed4b').classList.remove('hidden');
                     }
                 }
@@ -687,34 +687,34 @@
         });
     }
 
-    let flipAllInProgress = false;
-    function flipAllDigits() {
-        if (flipAllInProgress) return;
-        flipAllInProgress = true;
-        const cards = document.querySelectorAll('#flipZone .flip-card');
+    let incrementAllInProgress = false;
+    function incrementAllDigits() {
+        if (incrementAllInProgress) return;
+        incrementAllInProgress = true;
+        const cards = document.querySelectorAll('#incrementZone .increment-card');
         let pending = 0;
         cards.forEach((card, i) => {
-            if (!card.classList.contains('flipped')) {
+            if (!card.classList.contains('incremented')) {
                 pending++;
                 setTimeout(() => {
-                    card.classList.add('flipped');
-                    flippedDigits.push({ index: i, original: diagonalDigits[i], flipped: flipDigit(diagonalDigits[i]) });
+                    card.classList.add('incremented');
+                    incrementedDigits.push({ index: i, original: diagonalDigits[i], incremented: incrementDigit(diagonalDigits[i]) });
                     updateNewNumber();
-                    if (flippedDigits.length === diagonalDigits.length) {
+                    if (incrementedDigits.length === diagonalDigits.length) {
                         $('proceed4b').classList.remove('hidden');
                     }
                     pending--;
-                    if (pending === 0) flipAllInProgress = false;
+                    if (pending === 0) incrementAllInProgress = false;
                 }, i * 150);
             }
         });
-        if (pending === 0) flipAllInProgress = false;
+        if (pending === 0) incrementAllInProgress = false;
     }
 
     function updateNewNumber() {
-        const sorted = flippedDigits.slice().sort((a, b) => a.index - b.index);
+        const sorted = incrementedDigits.slice().sort((a, b) => a.index - b.index);
         let str = '0.';
-        sorted.forEach(d => str += d.flipped);
+        sorted.forEach(d => str += d.incremented);
         $('newNumber').textContent = str;
     }
 
@@ -892,7 +892,7 @@
 
                 // Reset Gallery 4
                 currentDiagStep = 0;
-                flippedDigits = [];
+                incrementedDigits = [];
                 currentCheckRow = 0;
                 initTableData();
                 buildDiagonalTable();
