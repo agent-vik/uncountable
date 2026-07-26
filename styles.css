@@ -44,15 +44,15 @@ body::before {
             45deg,
             transparent,
             transparent 80px,
-            rgba(212, 165, 116, 0.015) 80px,
-            rgba(212, 165, 116, 0.015) 81px
+            rgba(212, 165, 116, 0.04) 80px,
+            rgba(212, 165, 116, 0.04) 81px
         ),
         repeating-linear-gradient(
             135deg,
             transparent,
             transparent 80px,
-            rgba(212, 165, 116, 0.012) 80px,
-            rgba(212, 165, 116, 0.012) 81px
+            rgba(212, 165, 116, 0.03) 80px,
+            rgba(212, 165, 116, 0.03) 81px
         );
     pointer-events: none;
     z-index: 0;
@@ -84,7 +84,7 @@ body::after {
 }
 @keyframes infinityBreath {
     0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.95); }
-    50% { opacity: 0.025; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.06; transform: translate(-50%, -50%) scale(1); }
 }
 
 /* Nav Bar */
@@ -1014,9 +1014,9 @@ td.ellipsis-cell {
         135deg,
         transparent 0%,
         transparent 40%,
-        rgba(212, 165, 116, 0.02) 48%,
-        rgba(212, 165, 116, 0.03) 50%,
-        rgba(212, 165, 116, 0.02) 52%,
+        rgba(212, 165, 116, 0.06) 48%,
+        rgba(212, 165, 116, 0.08) 50%,
+        rgba(212, 165, 116, 0.06) 52%,
         transparent 60%,
         transparent 100%
     );
