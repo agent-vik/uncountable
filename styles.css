@@ -30,6 +30,84 @@ body {
     font-weight: 300;
     line-height: 1.8;
     overflow-x: hidden;
+    position: relative;
+}
+
+/* Diagonal grid background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image:
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 80px,
+            rgba(212, 165, 116, 0.015) 80px,
+            rgba(212, 165, 116, 0.015) 81px
+        ),
+        repeating-linear-gradient(
+            135deg,
+            transparent,
+            transparent 80px,
+            rgba(212, 165, 116, 0.012) 80px,
+            rgba(212, 165, 116, 0.012) 81px
+        );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Floating digits background */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Floating digits */
+.floating-digits {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+.float-digit {
+    position: absolute;
+    font-family: var(--mono);
+    color: var(--gold);
+    animation: floatDrift linear infinite;
+}
+@keyframes floatDrift {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(30px, -40px) rotate(5deg); }
+    50% { transform: translate(-20px, -80px) rotate(-3deg); }
+    75% { transform: translate(40px, -60px) rotate(4deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Infinity symbol breath (Gallery 6) */
+.gallery-6::after {
+    content: '∞';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--serif);
+    font-size: 30rem;
+    color: var(--gold);
+    opacity: 0;
+    pointer-events: none;
+    animation: infinityBreath 12s ease-in-out infinite;
+    z-index: 0;
+}
+@keyframes infinityBreath {
+    0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.95); }
+    50% { opacity: 0.025; transform: translate(-50%, -50%) scale(1); }
 }
 
 /* Nav Bar */
@@ -43,6 +121,7 @@ body {
     z-index: 100;
     font-size: 0.85rem;
 }
+main { position: relative; z-index: 1; }
 .nav-progress-bar {
     position: fixed; top: 57px; left: 0; right: 0;
     height: 2px;
@@ -941,6 +1020,25 @@ td.ellipsis-cell {
     font-size: 1.5rem;
     color: var(--text-faint);
     font-style: italic;
+}
+
+.gallery-4::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    background: linear-gradient(
+        135deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(212, 165, 116, 0.02) 48%,
+        rgba(212, 165, 116, 0.03) 50%,
+        rgba(212, 165, 116, 0.02) 52%,
+        transparent 60%,
+        transparent 100%
+    );
+    z-index: 0;
 }
 
 /* Portraits */
