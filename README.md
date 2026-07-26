@@ -15,25 +15,7 @@
 
 ## 在线访问
 
-[https://uncountable.victor42.work/](https://uncountable.victor42.work/)
-
-## 技术特点
-
-- **纯静态** — 单 HTML + CSS + JS，无框架无依赖
-- **响应式** — 适配桌面端和移动端
-- **渐进式互动** — 每个展厅有可操作的交互装置
-- **SEO** — 完整 meta 标签、Schema.org 结构化数据、站点地图
-
-## 项目结构
-
-```
-index.html      页面结构
-styles.css      样式
-script.js       交互逻辑
-assets/         肖像图片
-robots.txt      爬虫规则
-sitemap.xml     站点地图
-```
+[https://uncountable.victor42.work](https://uncountable.victor42.work)
 
 ## 作者
 
