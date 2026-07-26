@@ -598,44 +598,6 @@
         finalRow.appendChild(fTail);
         table.appendChild(finalRow);
 
-        // Draw precise diagonal line
-        drawDiagonalLine();
-    }
-
-    function drawDiagonalLine() {
-        const svg = $('diagonalLineSvg');
-        if (!svg) return;
-        const cell00 = $('cell-0-0');
-        const cell77 = $('cell-' + (TABLE_ROWS - 1) + '-' + (DECIMAL_PLACES - 1));
-        if (!cell00 || !cell77) return;
-
-        const container = svg.parentElement;
-        const cRect = container.getBoundingClientRect();
-        const r0 = cell00.getBoundingClientRect();
-        const r1 = cell77.getBoundingClientRect();
-
-        // Centers relative to container
-        const x1 = r0.left - cRect.left + r0.width / 2;
-        const y1 = r0.top - cRect.top + r0.height / 2;
-        const x2 = r1.left - cRect.left + r1.width / 2;
-        const y2 = r1.top - cRect.top + r1.height / 2;
-
-        svg.setAttribute('viewBox', '0 0 ' + cRect.width + ' ' + cRect.height);
-        svg.style.width = cRect.width + 'px';
-        svg.style.height = cRect.height + 'px';
-        const gid = 'diag-grad';
-        svg.innerHTML = `
-            <defs>
-                <linearGradient id="${gid}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stop-color="rgba(212, 165, 116, 0)" />
-                    <stop offset="40%" stop-color="rgba(212, 165, 116, 0.15)" />
-                    <stop offset="50%" stop-color="rgba(240, 200, 150, 0.35)" />
-                    <stop offset="60%" stop-color="rgba(212, 165, 116, 0.15)" />
-                    <stop offset="100%" stop-color="rgba(212, 165, 116, 0)" />
-                </linearGradient>
-            </defs>
-            <line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="url(#${gid})" stroke-width="3" />
-        `;
     }
 
     function stepNextDiag() {
