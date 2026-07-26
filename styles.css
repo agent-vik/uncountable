@@ -43,6 +43,19 @@ body {
     z-index: 100;
     font-size: 0.85rem;
 }
+.nav-progress-bar {
+    position: fixed; top: 57px; left: 0; right: 0;
+    height: 2px;
+    background: rgba(212, 165, 116, 0.05);
+    z-index: 100;
+    pointer-events: none;
+}
+.nav-progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+    width: 0%;
+    transition: width 0.3s ease;
+}
 .nav-brand {
     font-family: var(--serif);
     font-size: 1.3rem;
@@ -77,7 +90,24 @@ body {
     position: relative;
     border-bottom: 1px solid rgba(212, 165, 116, 0.04);
 }
+.gallery-1 { background: linear-gradient(180deg, var(--bg) 0%, #0c0a10 100%); }
+.gallery-2 { background: linear-gradient(180deg, #0c0a10 0%, #0e0b12 100%); }
+.gallery-3 { background: linear-gradient(180deg, #0e0b12 0%, #100c14 100%); }
+.gallery-4 { background: linear-gradient(180deg, #100c14 0%, #120e16 100%); }
+.gallery-5 { background: linear-gradient(180deg, #120e16 0%, #0e0b12 100%); }
+.gallery-6 { background: linear-gradient(180deg, #0e0b12 0%, var(--bg) 100%); }
+
 .gallery-inner { max-width: var(--max-width); width: 100%; text-align: center; }
+
+/* Diagonal motif — subtle background accent */
+.gallery::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(135deg, transparent 48%, rgba(212, 165, 116, 0.08) 49%, rgba(212, 165, 116, 0.08) 51%, transparent 52%);
+    pointer-events: none;
+}
 
 .gallery-number {
     font-family: var(--mono);
@@ -661,12 +691,13 @@ input[type="text"]:focus { border-color: var(--gold-dim); }
 .infinite-table {
     max-height: 400px;
     overflow-y: auto;
-    border: 1px solid var(--text-faint);
-    border-radius: 4px;
+    border: 1px solid rgba(212, 165, 116, 0.1);
+    border-radius: 8px;
     background: var(--bg-table);
     padding: 8px;
     scrollbar-width: thin;
     scrollbar-color: var(--gold-dim) var(--bg-table);
+    box-shadow: 0 0 30px rgba(212, 165, 116, 0.02);
 }
 .infinite-table::-webkit-scrollbar { width: 6px; }
 .infinite-table::-webkit-scrollbar-track { background: var(--bg-table); }
@@ -701,8 +732,9 @@ input[type="text"]:focus { border-color: var(--gold-dim); }
     margin: 24px 0;
     padding: 16px;
     background: var(--bg-table);
-    border: 1px solid var(--text-faint);
-    border-radius: 4px;
+    border: 1px solid rgba(212, 165, 116, 0.15);
+    border-radius: 8px;
+    box-shadow: 0 0 40px rgba(212, 165, 116, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.02);
 }
 table.diagonal-table {
     border-collapse: collapse;
@@ -869,9 +901,10 @@ td.ellipsis-cell {
     flex: 1;
     min-width: 220px;
     max-width: 280px;
-    padding: 20px;
+    padding: 24px;
     border-radius: 8px;
     text-align: center;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
 }
 .inf-card.left {
     background: rgba(122, 212, 165, 0.05);
@@ -934,14 +967,15 @@ td.ellipsis-cell {
 
 /* Portraits */
 .portrait {
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
     object-fit: cover;
     border-radius: 50%;
     border: 2px solid var(--gold-dim);
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     filter: sepia(0.3) brightness(0.9);
-    opacity: 0.85;
+    opacity: 0.9;
+    box-shadow: 0 0 30px rgba(212, 165, 116, 0.08);
 }
 
 /* Conclusion Sequence */
@@ -962,6 +996,7 @@ td.ellipsis-cell {
     color: var(--gold);
     font-weight: 600;
     margin: 8px 0;
+    text-shadow: 0 0 30px rgba(212, 165, 116, 0.15);
 }
 .conclusion-line.big {
     font-family: var(--serif);
@@ -969,12 +1004,13 @@ td.ellipsis-cell {
     color: var(--white);
     font-weight: 600;
     line-height: 1.6;
+    text-shadow: 0 0 40px rgba(245, 243, 238, 0.1);
 }
 .conclusion-gap { height: 32px; }
 
 .final-epitaph {
-    margin-top: 32px;
-    padding: 24px 16px;
+    margin-top: 40px;
+    padding: 32px 16px;
     border-top: 1px solid var(--gold-dim);
     border-bottom: 1px solid var(--gold-dim);
     background: rgba(212, 165, 116, 0.05);
@@ -982,8 +1018,8 @@ td.ellipsis-cell {
 .final-epitaph p {
     font-family: var(--serif);
     color: var(--text);
-    font-size: 1.05rem;
-    line-height: 1.8;
+    font-size: 1.1rem;
+    line-height: 2;
 }
 .final-epitaph p:first-child {
     font-family: var(--mono);
@@ -993,7 +1029,8 @@ td.ellipsis-cell {
 }
 .epitaph-quote { font-style: italic; color: var(--text); }
 
-.exhibit-end { text-align: center; margin-top: 48px; }
+.exhibit-end { text-align: center; margin-top: 64px; opacity: 0; transition: opacity 1.5s ease; }
+.exhibit-end.visible { opacity: 1; }
 .exhibit-end a { text-decoration: none; }
 
 /* Site Footer */

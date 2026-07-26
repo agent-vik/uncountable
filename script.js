@@ -780,12 +780,17 @@
 
     function initGallery6() {
         const items = document.querySelectorAll('#gallery-6 .reveal');
+        const exhibitEnd = document.querySelector('.exhibit-end');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     items.forEach((item, idx) => {
                         setTimeout(() => item.classList.add('visible'), idx * 1500);
                     });
+                    // Show the restart button after all epitaphs
+                    if (exhibitEnd) {
+                        setTimeout(() => exhibitEnd.classList.add('visible'), items.length * 1500 + 2000);
+                    }
                     observer.disconnect();
                 }
             });
@@ -797,6 +802,7 @@
     function initNavProgress() {
         const galleries = document.querySelectorAll('.gallery');
         const nav = $('navProgress');
+        const fill = $('navProgressFill');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -807,6 +813,13 @@
             });
         }, { threshold: 0.3 });
         galleries.forEach(g => observer.observe(g));
+
+        // Scroll progress bar
+        window.addEventListener('scroll', () => {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const pct = Math.min(100, (window.scrollY / scrollHeight) * 100);
+            if (fill) fill.style.width = pct + '%';
+        }, { passive: true });
     }
 
     // Init
