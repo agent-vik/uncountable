@@ -506,6 +506,16 @@
             // Re-initialize diagonal
             initTableData();
             buildDiagonalTable();
+
+            // Populate infinity comparison with user's actual numbers
+            const seqEl = $('infSeqRight');
+            if (seqEl) {
+                if (userNumbers.length >= 3) {
+                    seqEl.textContent = userNumbers.slice(0, 3).join(', ') + ', …';
+                } else if (userNumbers.length > 0) {
+                    seqEl.textContent = userNumbers.join(', ') + ', …';
+                }
+            }
             // Reset diagonal steps
             currentDiagStep = 0;
             flippedDigits = [];
@@ -765,16 +775,6 @@
 
     // Gallery 5 & 6: Reveal
     function initGallery5() {
-        // Populate infinity comparison with user's numbers
-        const seqEl = $('infSeqRight');
-        if (seqEl) {
-            if (userNumbers.length >= 3) {
-                seqEl.textContent = userNumbers.slice(0, 3).join(', ') + ', …';
-            } else if (userNumbers.length > 0) {
-                seqEl.textContent = userNumbers.join(', ') + ', …';
-            }
-        }
-
         const lines = document.querySelectorAll('#gallery-5 .reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
