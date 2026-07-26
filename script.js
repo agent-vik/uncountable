@@ -669,12 +669,10 @@
 
         diagonalDigits.forEach((d, i) => {
             const card = el('div', 'flip-card');
-            const inner = el('div', 'flip-card-inner');
-            const front = el('div', 'flip-card-front', d);
-            const back = el('div', 'flip-card-back', flipDigit(d));
-            inner.appendChild(front);
-            inner.appendChild(back);
-            card.appendChild(inner);
+            const oldNum = el('div', 'flip-card-num old', d);
+            const newNum = el('div', 'flip-card-num new', flipDigit(d));
+            card.appendChild(oldNum);
+            card.appendChild(newNum);
             card.onclick = () => {
                 if (!card.classList.contains('flipped')) {
                     card.classList.add('flipped');

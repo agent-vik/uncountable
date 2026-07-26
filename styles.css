@@ -855,35 +855,35 @@ td.ellipsis-cell {
     overflow: hidden;
     border-radius: 8px;
     cursor: pointer;
-}
-.flip-card-inner {
-    width: 100%; height: 100%;
-    position: relative;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.flip-card.flipped .flip-card-inner {
-    transform: translateY(-100%);
-}
-.flip-card-front, .flip-card-back {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 8px;
-    font-family: var(--mono); font-size: 1.4rem; font-weight: 700;
-}
-.flip-card-front {
     background: var(--bg-card);
     border: 2px solid var(--gold-dim);
+    transition: background 0.5s ease 0.3s, border-color 0.5s ease 0.3s;
+}
+.flip-card.flipped {
+    background: var(--gold);
+    border-color: var(--gold);
+}
+.flip-card-num {
+    position: absolute;
+    left: 0; right: 0;
+    display: flex; align-items: center; justify-content: center;
+    height: 100%;
+    font-family: var(--mono); font-size: 1.4rem; font-weight: 700;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.flip-card-num.old {
+    top: 0;
     color: var(--gold-bright);
 }
-.flip-card-back {
-    top: 100%;
-    background: var(--gold); color: var(--bg);
-    border: 2px solid var(--gold);
-}
-.flip-card.flipped .flip-card-front {
+.flip-card-num.new {
     top: -100%;
+    color: var(--bg);
+}
+.flip-card.flipped .flip-card-num.old {
+    transform: translateY(100%);
+}
+.flip-card.flipped .flip-card-num.new {
+    transform: translateY(100%);
 }
 
 .new-number-display {
