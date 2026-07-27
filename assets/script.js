@@ -3,11 +3,11 @@
     'use strict';
 
     // Config
-    let currentLang = 'zh';
+    let currentLang = 'en';
 
     // i18n
     function t(key, params) {
-        const dict = I18N[currentLang] || I18N['zh'];
+        const dict = I18N[currentLang] || I18N['en'];
         let str = dict[key] || key;
         if (params) {
             Object.keys(params).forEach(k => {
