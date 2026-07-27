@@ -40,7 +40,7 @@
         updateDynamicText();
         // Update URL
         const url = new URL(window.location);
-        if (lang === 'zh') url.searchParams.delete('lang');
+        if (lang === 'en') url.searchParams.delete('lang');
         else url.searchParams.set('lang', lang);
         window.history.replaceState({}, '', url);
     }
