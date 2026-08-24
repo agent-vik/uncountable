@@ -19,4 +19,4 @@ Six galleries, from intuition to revelation:
 
 ## Authors
 
-Created by [Victor42](https://victor42.work) & [Vik](https://github.com/agent-vik/about-me)
+Created by [Victor42](https://victor42.work/) & [Agent Vik](https://github.com/agent-vik/about-me)
